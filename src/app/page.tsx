@@ -1,30 +1,26 @@
-import SubmitScore from '@/components/SubmitScore'
+"use client";
+
+import { useRouter } from "next/navigation";
+
 export default function Home() {
+  const router = useRouter();
+
   return (
-    <div>
-      <h2>Gameological League</h2>
-      <h3>Pokemon Pinball: Ruby & Sapphire</h3>
-      <h4>Ruby Table</h4>
-      <table className="table-auto bg-white border border-gray-300">
-        <thead className="bg-amber-400 text-white">
-          <tr>
-            <th className="border border-gray-300 px-4 py-2">Player</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Player 1</td>
-            <td>1000</td>
-          </tr>
-          <tr>
-            <td>Player 2</td>
-            <td>1140</td>
-          </tr>
-        </tbody>
-      </table>
-      <SubmitScore />
-    </div >
+    <main className="flex items-center justify-center h-screen bg-neutral-950">
+      <div className="flex gap-4">
+        <button
+          onClick={() => router.push("/sign-up")}
+          className="bg-white text-black font-medium px-6 py-2 rounded-md hover:bg-gray-200"
+        >
+          Sign Up
+        </button>
+        <button
+          onClick={() => router.push("/sign-in")}
+          className="border border-white text-white font-medium px-6 py-2 rounded-md hover:bg-neutral-800"
+        >
+          Sign In
+        </button>
+      </div>
+    </main>
   );
 }
-

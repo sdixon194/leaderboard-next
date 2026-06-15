@@ -14,7 +14,7 @@ datasource db {
 
 model User {
   id            String    @id
-  displayName   String
+  name          String
   email         String
   emailVerified Boolean   @default(false)
   image         String?
@@ -22,6 +22,9 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  scores        Score[]
+  joinedLeagues League[]  @relation("Players")
+  ownedLeagues  League[]  @relation("OwnedLeagues")
 
   @@unique([email])
   @@map("user")
@@ -73,4 +76,44 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model League {
+  id        String   @id @default(uuid())
+  name      String
+  owner     User     @relation("OwnedLeagues", fields: [ownerId], references: [id])
+  ownerId   String
+  players   User[]   @relation("Players")
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  games     Game[]
+
+  @@map("league")
+}
+
+model Game {
+  id        String    @id @default(uuid())
+  name      String
+  category  String?
+  platform  String?
+  createdAt DateTime  @default(now())
+  updateAt  DateTime  @updatedAt
+  league    League    @relation(fields: [leagueId], references: [id])
+  leagueId  String
+  begin     DateTime?
+  end       DateTime?
+  scores    Score[]
+
+  @@map("game")
+}
+
+model Score {
+  id       String @id @default(uuid())
+  score    Int
+  player   User   @relation(fields: [playerId], references: [id])
+  playerId String
+  game     Game   @relation(fields: [gameId], references: [id])
+  gameId   String
+
+  @@map("score")
 }
