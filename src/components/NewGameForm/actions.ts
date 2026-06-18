@@ -2,13 +2,12 @@
 import { redirect, RedirectType } from 'next/navigation';
 import prisma from "@/lib/prisma";
 
-export async function createLeague(ownerId: string, formData: FormData) {
+export async function createGame(leagueId: string, formData: FormData) {
   const name = formData.get("leagueName") as string;
-
-  const league = await prisma.league.create({
+  const league = await prisma.game.create({
     data: {
       name,
-      ownerId,
+      leagueId
     }
   });
   redirect(`league/${league.id}`, RedirectType.push)

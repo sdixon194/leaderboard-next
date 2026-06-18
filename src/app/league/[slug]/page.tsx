@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { notFound } from 'next/navigation';
+import NewGameForm from "@/components/NewGameForm/NewGameForm";
 
 export default async function LeaguePage({
   params,
@@ -12,7 +13,12 @@ export default async function LeaguePage({
     notFound();
   }
 
+  // Loop through games here.
+
   return (
-    <div>{league.name}</div>
+    <div>
+      <h1>{league.name}</h1>
+      <NewGameForm ownerId="" leagueId={league.id} />
+    </div>
   )
 }
