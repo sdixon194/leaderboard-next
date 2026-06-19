@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "score" ALTER COLUMN "score" SET DATA TYPE TEXT;

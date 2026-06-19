@@ -1,5 +1,7 @@
 'use client'
 import { useState } from 'react';
+import Form from "next/form";
+import { submitScore } from './actions';
 
 const SubmitScore = () => {
   const [score, onScoreChange] = useState('')
@@ -15,9 +17,9 @@ const SubmitScore = () => {
 
   return (
     <div>
-      <form onSubmit={handleNewScoreSubmit}>
+      <Form onSubmit={submitScore}>
         <label>New Score:
-          <input type="text" value={score} onChange={(e) => handleScoreChange(e.target.value)} />
+          <input id="score" name="score" type="text" value={score} onChange={(e) => handleScoreChange(e.target.value)} />
         </label>
         <button >Submit</button>
       </form>
