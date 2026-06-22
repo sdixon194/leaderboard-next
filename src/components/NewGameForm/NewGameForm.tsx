@@ -3,7 +3,6 @@ import Form from "next/form";
 import { createGame } from "./actions";
 import { useState } from 'react';
 const NewGameForm = ({ leagueId }: { ownerId: string, leagueId: string }) => {
-  const createGameWithId = createGame.bind(null, leagueId);
 
   const date = new Date();
   const weekDate = new Date(date);
@@ -18,7 +17,7 @@ const NewGameForm = ({ leagueId }: { ownerId: string, leagueId: string }) => {
 
   return (
     <div>
-      <Form action={createGameWithId}>
+      <Form action={createGame}>
         <div>
           <label htmlFor='gameName'>Game Name:
             <input type="text" id="gameName" name="gameName" placeholder="Joust.." required />
@@ -65,6 +64,7 @@ const NewGameForm = ({ leagueId }: { ownerId: string, leagueId: string }) => {
           </label>
         </div>
         <input type="hidden" id="tzOffset" name="tzOffset" value={date.getTimezoneOffset()} />
+        <input type="hidden" id="leagueId" name="leagueId" value={leagueId} />
         <div>
           <button >Create Game</button>
         </div>

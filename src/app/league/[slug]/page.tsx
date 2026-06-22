@@ -1,7 +1,8 @@
+"use server";
 import prisma from "@/lib/prisma";
 import { notFound } from 'next/navigation';
 import NewGameForm from "@/components/NewGameForm/NewGameForm";
-import GameBoard from "@/components/GameBoard/GameBoard";
+import GameList from "@/components/GameList/GameList";
 
 export default async function LeaguePage({
   params,
@@ -9,7 +10,7 @@ export default async function LeaguePage({
   const { slug } = await params;
   const league = await prisma.league.findUnique({
     where: { id: slug }
-  })
+  });
   if (!league) {
     notFound();
   }
@@ -22,9 +23,7 @@ export default async function LeaguePage({
   return (
     <div>
       <h1>{league.name}</h1>
-      {games ? games.map((game) =>
-        <GameBoard game={game} key={game.id} />
-      ) : <p>No games found yet!</p>}
+      <GameList games={games} />
       <NewGameForm ownerId="" leagueId={league.id} />
     </div>
   )

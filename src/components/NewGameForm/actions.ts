@@ -2,7 +2,8 @@
 import { redirect, RedirectType } from 'next/navigation';
 import prisma from "@/lib/prisma";
 
-export async function createGame(leagueId: string, formData: FormData) {
+export async function createGame(formData: FormData) {
+  const leagueId = formData.get("leagueId") as string;
   const name = formData.get("gameName") as string;
   const platform = formData.get("platform") as string;
   const category = formData.get("category") as string;
