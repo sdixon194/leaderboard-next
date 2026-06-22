@@ -1,26 +1,32 @@
 'use client'
 import { useState } from 'react';
+import Form from "next/form";
+import { submitScore } from './actions';
+import { useSession, signOut } from "@/lib/auth-client";
 
-const SubmitScore = () => {
+const SubmitScore = ({ gameId }: { gameId: string }) => {
   const [score, onScoreChange] = useState('')
+  const { data: session } = useSession();
+
+  if (!session?.user)
+    return <p className="text-center mt-8">Sign in to Submit Score</p>;
+
+  const { user } = session;
 
   const handleScoreChange = (value: string) => {
     onScoreChange(value)
   }
 
-  const handleNewScoreSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log("I have submitted the score: " + score)
-  }
-
   return (
     <div>
-      <form onSubmit={handleNewScoreSubmit}>
+      <Form action={submitScore}>
         <label>New Score:
-          <input type="text" value={score} onChange={(e) => handleScoreChange(e.target.value)} />
+          <input id="score" name="score" type="text" value={score} onChange={(e) => handleScoreChange(e.target.value)} />
         </label>
+        <input type='hidden' id='gameId' name='gameId' value={gameId} />
+        <input type='hidden' id='playerId' name='playerId' value={user.id} />
         <button >Submit</button>
-      </form>
+      </Form>
     </div >
   )
 }
