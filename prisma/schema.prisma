@@ -13,21 +13,32 @@ datasource db {
 }
 
 model User {
-  id            String    @id
+  id            String          @id
   name          String
   email         String
-  emailVerified Boolean   @default(false)
+  emailVerified Boolean         @default(false)
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   sessions      Session[]
   accounts      Account[]
   scores        Score[]
-  joinedLeagues League[]  @relation("Players")
-  ownedLeagues  League[]  @relation("OwnedLeagues")
+  joinedLeagues LeaguePlayers[]
+  ownedLeagues  League[]        @relation("OwnedLeagues")
 
   @@unique([email])
   @@map("user")
+}
+
+model LeaguePlayers {
+  leagueId String
+  userId   String
+  role     Role   @default(PLAYER)
+  league   League @relation(fields: [leagueId], references: id)
+  user     User   @relation(fields: [userId], references: id)
+
+  @@id([userId, leagueId])
+  @@map("league_players")
 }
 
 model Session {
@@ -79,14 +90,14 @@ model Verification {
 }
 
 model League {
-  id        String   @id @default(uuid())
+  id        String          @id @default(uuid())
   name      String
-  owner     User     @relation("OwnedLeagues", fields: [ownerId], references: [id])
+  owner     User            @relation("OwnedLeagues", fields: [ownerId], references: [id])
   ownerId   String
-  players   User[]   @relation("Players")
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
   games     Game[]
+  players   LeaguePlayers[]
 
   @@map("league")
 }
@@ -97,7 +108,7 @@ model Game {
   category  String?
   platform  String?
   createdAt DateTime  @default(now())
-  updateAt  DateTime  @updatedAt
+  updatedAt DateTime  @updatedAt
   league    League    @relation(fields: [leagueId], references: [id])
   leagueId  String
   begin     DateTime?
@@ -108,12 +119,19 @@ model Game {
 }
 
 model Score {
-  id       String @id @default(uuid())
-  score    String
-  player   User   @relation(fields: [playerId], references: [id])
-  playerId String
-  game     Game   @relation(fields: [gameId], references: [id])
-  gameId   String
+  id        String   @id @default(uuid())
+  score     Float
+  player    User     @relation(fields: [playerId], references: [id])
+  playerId  String
+  game      Game     @relation(fields: [gameId], references: [id])
+  gameId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("score")
+}
+
+enum Role {
+  ADMIN
+  PLAYER
 }

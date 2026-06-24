@@ -2,7 +2,9 @@
 import Form from "next/form";
 import { createGame } from "./actions";
 import { useState } from 'react';
-const NewGameForm = ({ leagueId }: { ownerId: string, leagueId: string }) => {
+import { useSession } from "@/lib/auth-client";
+import { League } from "@/app/generated/prisma/client"
+const NewGameForm = ({ ownerId, league }: { ownerId: string, league: League }) => {
 
   const date = new Date();
   const weekDate = new Date(date);
@@ -14,6 +16,16 @@ const NewGameForm = ({ leagueId }: { ownerId: string, leagueId: string }) => {
   const [defaultEndDate, setDefaultEndDate] = useState(`${weekDate.getFullYear()}-${('0' + (weekDate.getMonth() + 1)).slice(-2)}-${('0' + weekDate.getDate()).slice(-2)}`);
   const defaultEndHour = weekDate.getHours();
   const defaultEndMins = weekDate.getMinutes();
+
+  const { data: session } = useSession();
+
+  if (!session?.user)
+    return <p className="text-center mt-8">Sign in to create game</p>;
+
+  const { user } = session;
+  if (user.id !== league.ownerId) {
+    return <></>
+  }
 
   return (
     <div>
@@ -64,7 +76,7 @@ const NewGameForm = ({ leagueId }: { ownerId: string, leagueId: string }) => {
           </label>
         </div>
         <input type="hidden" id="tzOffset" name="tzOffset" value={date.getTimezoneOffset()} />
-        <input type="hidden" id="leagueId" name="leagueId" value={leagueId} />
+        <input type="hidden" id="leagueId" name="leagueId" value={league.id} />
         <div>
           <button >Create Game</button>
         </div>

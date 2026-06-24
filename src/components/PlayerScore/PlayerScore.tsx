@@ -1,11 +1,12 @@
-import { Score } from "@/app/generated/prisma/client"
 
-const PlayerScore = (score: Score) => {
+const PlayerScore = ({ score, player, date }: { score: number, player: string, date: Date }) => {
+  const submittedOn = date.toLocaleDateString();
   return (
     <tr>
-      <td>{score.playerId}</td>
-      <td>{score.score}</td>
-    </tr>);
+      <td>{player}</td>
+      <td>{score.toString()}</td>
+      <td>{submittedOn}</td>
+    </tr >);
 }
 
 export default PlayerScore;

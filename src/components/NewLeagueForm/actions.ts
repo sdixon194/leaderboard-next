@@ -9,7 +9,11 @@ export async function createLeague(ownerId: string, formData: FormData) {
     data: {
       name,
       ownerId,
+      players: {
+        create: [{ userId: ownerId, role: 'ADMIN' }]
+      }
     }
   });
+
   redirect(`league/${league.id}`, RedirectType.push)
 }

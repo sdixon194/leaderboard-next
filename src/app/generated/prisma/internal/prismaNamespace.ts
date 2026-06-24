@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
+  LeaguePlayers: 'LeaguePlayers',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
@@ -406,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "league" | "game" | "score"
+    modelProps: "user" | "leaguePlayers" | "session" | "account" | "verification" | "league" | "game" | "score"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -481,6 +482,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeaguePlayers: {
+      payload: Prisma.$LeaguePlayersPayload<ExtArgs>
+      fields: Prisma.LeaguePlayersFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeaguePlayersFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeaguePlayersFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload>
+        }
+        findFirst: {
+          args: Prisma.LeaguePlayersFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeaguePlayersFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload>
+        }
+        findMany: {
+          args: Prisma.LeaguePlayersFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload>[]
+        }
+        create: {
+          args: Prisma.LeaguePlayersCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload>
+        }
+        createMany: {
+          args: Prisma.LeaguePlayersCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeaguePlayersCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload>[]
+        }
+        delete: {
+          args: Prisma.LeaguePlayersDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload>
+        }
+        update: {
+          args: Prisma.LeaguePlayersUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeaguePlayersDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeaguePlayersUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeaguePlayersUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeaguePlayersUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaguePlayersPayload>
+        }
+        aggregate: {
+          args: Prisma.LeaguePlayersAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeaguePlayers>
+        }
+        groupBy: {
+          args: Prisma.LeaguePlayersGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeaguePlayersGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeaguePlayersCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeaguePlayersCountAggregateOutputType> | number
         }
       }
     }
@@ -980,6 +1055,15 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const LeaguePlayersScalarFieldEnum = {
+  leagueId: 'leagueId',
+  userId: 'userId',
+  role: 'role'
+} as const
+
+export type LeaguePlayersScalarFieldEnum = (typeof LeaguePlayersScalarFieldEnum)[keyof typeof LeaguePlayersScalarFieldEnum]
+
+
 export const SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -1030,7 +1114,7 @@ export const LeagueScalarFieldEnum = {
   name: 'name',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
-  updateAt: 'updateAt'
+  updatedAt: 'updatedAt'
 } as const
 
 export type LeagueScalarFieldEnum = (typeof LeagueScalarFieldEnum)[keyof typeof LeagueScalarFieldEnum]
@@ -1042,7 +1126,7 @@ export const GameScalarFieldEnum = {
   category: 'category',
   platform: 'platform',
   createdAt: 'createdAt',
-  updateAt: 'updateAt',
+  updatedAt: 'updatedAt',
   leagueId: 'leagueId',
   begin: 'begin',
   end: 'end'
@@ -1055,7 +1139,9 @@ export const ScoreScalarFieldEnum = {
   id: 'id',
   score: 'score',
   playerId: 'playerId',
-  gameId: 'gameId'
+  gameId: 'gameId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ScoreScalarFieldEnum = (typeof ScoreScalarFieldEnum)[keyof typeof ScoreScalarFieldEnum]
@@ -1123,6 +1209,34 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Role'
+ */
+export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
+    
+
+
+/**
+ * Reference to a field of type 'Role[]'
+ */
+export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -1250,6 +1364,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  leaguePlayers?: Prisma.LeaguePlayersOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit

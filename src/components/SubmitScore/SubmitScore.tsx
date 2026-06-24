@@ -1,11 +1,13 @@
 'use client'
-import { useState } from 'react';
 import Form from "next/form";
+import { useState } from "react";
 import { submitScore } from './actions';
-import { useSession, signOut } from "@/lib/auth-client";
+import { useSession } from "@/lib/auth-client";
+import { usePathname } from 'next/navigation';
 
 const SubmitScore = ({ gameId }: { gameId: string }) => {
-  const [score, onScoreChange] = useState('')
+  const pathName = usePathname();
+  const [score, setScore] = useState('')
   const { data: session } = useSession();
 
   if (!session?.user)
@@ -14,7 +16,7 @@ const SubmitScore = ({ gameId }: { gameId: string }) => {
   const { user } = session;
 
   const handleScoreChange = (value: string) => {
-    onScoreChange(value)
+    setScore(value)
   }
 
   return (
@@ -25,7 +27,9 @@ const SubmitScore = ({ gameId }: { gameId: string }) => {
         </label>
         <input type='hidden' id='gameId' name='gameId' value={gameId} />
         <input type='hidden' id='playerId' name='playerId' value={user.id} />
-        <button >Submit</button>
+        <input type='hidden' id='playerId' name='playerId' value={user.id} />
+        <input type='hidden' id='path' name='path' value={pathName} />
+        <button>Submit</button>
       </Form>
     </div >
   )

@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  LeaguePlayers: 'LeaguePlayers',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
@@ -87,6 +88,15 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const LeaguePlayersScalarFieldEnum = {
+  leagueId: 'leagueId',
+  userId: 'userId',
+  role: 'role'
+} as const
+
+export type LeaguePlayersScalarFieldEnum = (typeof LeaguePlayersScalarFieldEnum)[keyof typeof LeaguePlayersScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
@@ -139,7 +149,7 @@ export const LeagueScalarFieldEnum = {
   name: 'name',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
-  updateAt: 'updateAt'
+  updatedAt: 'updatedAt'
 } as const
 
 export type LeagueScalarFieldEnum = (typeof LeagueScalarFieldEnum)[keyof typeof LeagueScalarFieldEnum]
@@ -151,7 +161,7 @@ export const GameScalarFieldEnum = {
   category: 'category',
   platform: 'platform',
   createdAt: 'createdAt',
-  updateAt: 'updateAt',
+  updatedAt: 'updatedAt',
   leagueId: 'leagueId',
   begin: 'begin',
   end: 'end'
@@ -164,7 +174,9 @@ export const ScoreScalarFieldEnum = {
   id: 'id',
   score: 'score',
   playerId: 'playerId',
-  gameId: 'gameId'
+  gameId: 'gameId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ScoreScalarFieldEnum = (typeof ScoreScalarFieldEnum)[keyof typeof ScoreScalarFieldEnum]
