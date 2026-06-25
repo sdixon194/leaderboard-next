@@ -1,12 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useSession, signOut } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import { useEffect } from 'react';
 import NewLeagueForm from "@/components/NewLeagueForm/NewLeagueForm";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { data: session, isPending } = useSession();
+  const { data: session, isPending } = authClient.useSession();
 
   useEffect(() => {
     if (!isPending && !session?.user) {
@@ -26,7 +26,7 @@ export default function DashboardPage() {
       <p>Email: {user.email}</p>
       <NewLeagueForm ownerId={user.id} />
       <button
-        onClick={() => signOut()}
+        onClick={() => authClient.signOut()}
         className="w-full bg-white text-black font-medium rounded-md px-4 py-2 hover:bg-gray-200" > Sign Out
       </button>
     </main >

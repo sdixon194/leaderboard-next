@@ -23,7 +23,7 @@ export default async function LeaguePage({
   return (
     <div>
       <h1>{league.name}</h1>
-      <GameList games={games} leagueId={league.id} />
+      <GameList games={games} />
       <br></br>
       <NewGameForm ownerId="" league={league} />
     </div>

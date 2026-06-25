@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function SignInPage() {
 
     const formData = new FormData(e.currentTarget);
 
-    const res = await signIn.email({
+    const res = await authClient.signIn.email({
       email: formData.get("email") as string,
       password: formData.get("password") as string,
     });
@@ -37,14 +37,14 @@ export default function SignInPage() {
           type="email"
           placeholder="Email"
           required
-          className="w-full rounded-md bg-neutral-900 border border-neutral-700 px-3 py-2"
+          className="w-full rounded-md bg-neutral-900 border border-neutral-700 px-3 py-2 text-white"
         />{" "}
         <input
           name="password"
           type="password"
           placeholder="Password"
           required
-          className="w-full rounded-md bg-neutral-900 border border-neutral-700 px-3 py-2"
+          className="w-full rounded-md bg-neutral-900 border border-neutral-700 px-3 py-2 text-white"
         />{" "}
         <button
           type="submit"

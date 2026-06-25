@@ -2,7 +2,7 @@
 import Form from "next/form";
 import { createGame } from "./actions";
 import { useState } from 'react';
-import { useSession } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import { League } from "@/app/generated/prisma/client"
 const NewGameForm = ({ ownerId, league }: { ownerId: string, league: League }) => {
 
@@ -17,7 +17,7 @@ const NewGameForm = ({ ownerId, league }: { ownerId: string, league: League }) =
   const defaultEndHour = weekDate.getHours();
   const defaultEndMins = weekDate.getMinutes();
 
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
 
   if (!session?.user)
     return <p className="text-center mt-8">Sign in to create game</p>;

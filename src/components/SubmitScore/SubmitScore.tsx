@@ -2,13 +2,13 @@
 import Form from "next/form";
 import { useState } from "react";
 import { submitScore } from './actions';
-import { useSession } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import { usePathname } from 'next/navigation';
 
 const SubmitScore = ({ gameId }: { gameId: string }) => {
   const pathName = usePathname();
   const [score, setScore] = useState('')
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
 
   if (!session?.user)
     return <p className="text-center mt-8">Sign in to Submit Score</p>;

@@ -4,7 +4,8 @@ import { Game } from "@/app/generated/prisma/client";
 import prisma from "@/lib/prisma";
 import PlayerScore from "../PlayerScore/PlayerScore";
 
-export default async function GameBoard({ game, leagueId }: { game: Game, leagueId: string }) {
+export default async function GameBoard({ game }: { game: Game }) {
+  console.log(game);
   const beginTime = game.begin ?? null;
   const endTime = game.end ?? null;
   //console.log(Math.floor(game.begin.getTime() / 1000));

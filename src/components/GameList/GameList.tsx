@@ -1,7 +1,7 @@
 import { Game } from "@/app/generated/prisma/client"
 import GameBoard from "../GameBoard/GameBoard";
 
-const GameList = ({ games, leagueId }: { games: Array<Game>, leagueId: string }) => {
+const GameList = ({ games }: { games: Array<Game> }) => {
   if (!games) {
     return (<p>No games found!</p>)
   }
@@ -9,7 +9,7 @@ const GameList = ({ games, leagueId }: { games: Array<Game>, leagueId: string })
     <div>
       {
         games.map((game) =>
-          <GameBoard game={game} key={game.id} leagueId={leagueId} />
+          <GameBoard game={game} key={game.id} />
         )
       }
     </div>
