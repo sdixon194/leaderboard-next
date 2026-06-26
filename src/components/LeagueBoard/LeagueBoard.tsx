@@ -14,7 +14,7 @@ type LeagueDashType = {
 }
 const LeagueBoard = ({ league }: { league: LeagueDashType }) => {
   const game = league.league.games[0];
-  const url = `/league/${league.league.id}`;
+  const url = `/leagues/${league.league.id}`;
   return (
     <div>
       <h2><Link href={url}>{league.league.name}</Link></h2>

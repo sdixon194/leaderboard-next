@@ -15,5 +15,5 @@ export async function createLeague(ownerId: string, formData: FormData) {
     }
   });
 
-  redirect(`league/${league.id}`, RedirectType.push)
+  redirect(`leagues/${league.id}`, RedirectType.push)
 }

@@ -28,7 +28,7 @@ export async function createGame(formData: FormData) {
       end: endDateUTC,
     }
   });
-  redirect(`/league/${leagueId}`, RedirectType.replace)
+  redirect(`/leagues/${leagueId}`, RedirectType.replace)
 }
 
 function getTimeZone(offset: number) {
