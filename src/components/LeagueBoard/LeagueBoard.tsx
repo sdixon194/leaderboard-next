@@ -16,9 +16,9 @@ const LeagueBoard = ({ league }: { league: LeagueDashType }) => {
   const game = league.league.games[0];
   const url = `/leagues/${league.league.id}`;
   return (
-    <div>
+    <div className="m-auto">
       <h2><Link href={url}>{league.league.name}</Link></h2>
-      < GameBoard game={game} />
+      <GameBoard game={game} />
     </div >
   )
 }

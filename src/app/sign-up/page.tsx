@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
-import { signUp } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 export default function SignUpPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -10,7 +10,7 @@ export default function SignUpPage() {
     e.preventDefault();
     setError(null);
     const formData = new FormData(e.currentTarget);
-    const res = await signUp.email({
+    const res = await authClient.signUp.email({
       name: formData.get("displayName") as string,
       email: formData.get("email") as string,
       password: formData.get("password") as string,

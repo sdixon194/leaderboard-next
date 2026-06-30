@@ -13,7 +13,7 @@ type LeagueDashType = {
 
 export default function LeagueList({ leagues }: { leagues: Array<LeagueDashType> | [] }) {
   return (
-    <div>
+    <div className="col-span-6 p-5 bg-white">
       <h1>My Leagues</h1>
       {leagues.map(league => <LeagueBoard league={league} key={league.league.id} />)}
     </div>);

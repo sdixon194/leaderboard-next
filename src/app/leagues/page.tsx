@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import prisma from '@/lib/prisma';
 
 export default async function LeaguePage() {
+
+  /*< LeagueList leagues={leagueObject} />*/
   const session = await auth.api.getSession({
     headers: await headers()
   });
@@ -29,8 +31,10 @@ export default async function LeaguePage() {
     }
   })
   return (
-    <div>
-      <LeagueList leagues={leagueObject} />
-    </div>
+    <div className='col-span-12 bg-slate-100 grid grid-cols-12 gap-x-2 gap-y-2'>
+      <div className='col-span-3'>2</div>
+      < LeagueList leagues={leagueObject} />
+      <div className='col-span-3'>5</div>
+    </div >
   )
 }

@@ -6,8 +6,8 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <main className="flex items-center justify-center h-screen bg-neutral-950">
-      <div className="flex gap-4">
+    <main>
+      <div>
         <button
           onClick={() => router.push("/sign-up")}
           className="bg-white text-black font-medium px-6 py-2 rounded-md hover:bg-gray-200"

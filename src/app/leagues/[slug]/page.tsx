@@ -39,12 +39,16 @@ export default async function LeaguePage({
   const isAdmin = currentPlayer && currentPlayer[0]?.role === 'ADMIN';
 
   return (
-    <div>
-      <h1>{league.name}</h1>
-      <GameList games={games} />
-      <PlayerList players={users} />
-      {isAdmin && <NewGameForm league={league} />}
-      {isAdmin && <InvitePlayer leagueId={league.id} />}
+    <div className="col-span-12 bg-slate-100 grid grid-cols-12 gap-x-2 gap-y-2">
+      <div className='col-span-3'>User info</div>
+      <div className='col-span-6 bg-white rounded-sm p-2'>
+        <h1>{league.name}</h1>
+        <GameList games={games} />
+        <PlayerList players={users} />
+        {isAdmin && <NewGameForm league={league} />}
+        {isAdmin && <InvitePlayer leagueId={league.id} />}
+      </div>
+      <div className='col-span-3'>League Info</div>
     </div >
   )
 }
