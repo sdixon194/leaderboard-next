@@ -20,16 +20,16 @@ const SubmitScore = ({ gameId }: { gameId: string }) => {
   }
 
   return (
-    <div>
+    <div className="m-2">
       <Form action={submitScore}>
         <label>New Score:
-          <input id="score" name="score" type="text" value={score} onChange={(e) => handleScoreChange(e.target.value)} />
+          <input className="bg-slate-100 border" id=" score" name="score" type="text" value={score} onChange={(e) => handleScoreChange(e.target.value)} />
         </label>
         <input type='hidden' id='gameId' name='gameId' value={gameId} />
         <input type='hidden' id='playerId' name='playerId' value={user.id} />
         <input type='hidden' id='playerId' name='playerId' value={user.id} />
         <input type='hidden' id='path' name='path' value={pathName} />
-        <button>Submit</button>
+        <button className="border m-2 p-2 rounded-sm">Submit</button>
       </Form>
     </div >
   )

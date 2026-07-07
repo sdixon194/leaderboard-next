@@ -1,34 +1,34 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
-import { useEffect } from 'react';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { redirect } from "next/navigation";
 import NewLeagueForm from "@/components/NewLeagueForm/NewLeagueForm";
+import LeagueList from "@/components/LeagueList/LeagueList";
 
-export default function DashboardPage() {
-  const router = useRouter();
-  const { data: session, isPending } = authClient.useSession();
+export default async function DashboardPage() {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
-  useEffect(() => {
-    if (!isPending && !session?.user) {
-      router.push("/sign-in");
-    }
-  }, [isPending, session, router]);
-
-  if (isPending)
-    return <p className="text-center mt-8 text-white">Loading...</p>;
-  if (!session?.user)
-    return <p className="text-center mt-8 text-white">Redirecting...</p>;
+  if (!session) {
+    redirect('/sign-in');
+  }
   const { user } = session;
   return (
-    <main className="max-w-md h-screen flex items-center justify-center flex-col mx-auto p-6 space-y-4">
-      <h1 className="text-2xl font-bold">Dashboard</h1>
-      <p>Welcome, {user.name || "User"}!</p>
-      <p>Email: {user.email}</p>
-      <NewLeagueForm ownerId={user.id} />
-      <button
-        onClick={() => authClient.signOut()}
-        className="w-full bg-white text-black font-medium rounded-md px-4 py-2 hover:bg-gray-200" > Sign Out
-      </button>
-    </main >
+    <div className="m-5 flex flex-col gap-5">
+      <div className="mx-5 p-5 rounded-sm drop-shadow-md bg-white">
+        <h1>Dashboard</h1>
+        <p>Welcome, {user.name || "User"}!</p>
+      </div>
+      <div className="p-5 flex gap-5">
+        <div className="p-5 rounded-sm drop-shadow-md bg-white flex-1">
+          <h2>Create New League</h2>
+          <NewLeagueForm ownerId={user.id} />
+        </div>
+        <div className="p-5 rounded-sm drop-shadow-md bg-white flex-2">
+          <h2>My Leagues</h2>
+          <LeagueList userId={user.id} />
+        </div>
+      </div>
+    </div >
   );
 }

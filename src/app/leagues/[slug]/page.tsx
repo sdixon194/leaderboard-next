@@ -1,10 +1,9 @@
 "use server";
 import prisma from "@/lib/prisma";
 import { notFound } from 'next/navigation';
-import NewGameForm from "@/components/NewGameForm/NewGameForm";
 import GameList from "@/components/GameList/GameList";
-import InvitePlayer from "@/components/InvitePlayer/InvitePlayer";
-import PlayerList from "@/components/PlayerList/PlayerList";
+import UserInfo from "@/components/UserInfo/UserInfo";
+import LeagueInfo from "@/components/LeagueInfo/LeagueInfo"
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 
@@ -24,8 +23,11 @@ export default async function LeaguePage({
   const games = await prisma.game.findMany({
     where: {
       leagueId: league.id
+    },
+    orderBy: {
+      updatedAt: "desc"
     }
-  })
+  });
 
   const players = await prisma.leaguePlayers.findMany({
     where: { leagueId: league.id },
@@ -39,12 +41,13 @@ export default async function LeaguePage({
   const isAdmin = currentPlayer && currentPlayer[0]?.role === 'ADMIN';
 
   return (
-    <div>
-      <h1>{league.name}</h1>
-      <GameList games={games} />
-      <PlayerList players={users} />
-      {isAdmin && <NewGameForm league={league} />}
-      {isAdmin && <InvitePlayer leagueId={league.id} />}
+    <div className="col-span-12 flex gap-5 my-5 mx-5 flex-wrap">
+      <div className='flex-1'><UserInfo player={currentPlayer[0].user} /></div>
+      <div className='flex-2 bg-white rounded-sm p-2'>
+        <h1>{league.name}</h1>
+        <GameList games={games} />
+      </div>
+      <div className='flex-1'><LeagueInfo league={league} players={users} isAdmin={isAdmin} /></div>
     </div >
   )
 }

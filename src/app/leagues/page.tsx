@@ -2,7 +2,6 @@ import LeagueList from "@/components/LeagueList/LeagueList";
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from "next/navigation";
-import prisma from '@/lib/prisma';
 
 export default async function LeaguePage() {
   const session = await auth.api.getSession({
@@ -13,24 +12,11 @@ export default async function LeaguePage() {
     redirect('/sign-in');
   }
   const { user } = session;
-  const leagueObject = await prisma.leaguePlayers.findMany({
-    where: { userId: user.id },
-    select: {
-      league: {
-        include: {
-          games: {
-            orderBy: {
-              begin: "desc",
-            },
-            take: 1,
-          },
-        },
-      },
-    }
-  })
   return (
-    <div>
-      <LeagueList leagues={leagueObject} />
-    </div>
+    <div className='flex m-5 justify-center'>
+      <div className="w-2/3">
+        <LeagueList userId={user.id} />
+      </div>
+    </div >
   )
 }
