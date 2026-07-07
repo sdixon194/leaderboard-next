@@ -17,25 +17,25 @@ const NewGameForm = ({ league }: { league: League }) => {
   const defaultEndMins = weekDate.getMinutes();
 
   return (
-    <div className="border w-100 p-5 m-5">
+    <div className="drop-shadow-sm p-5 m-5 bg-white">
       <h3>Create New Game</h3>
       <Form action={createGame}>
-        <div>
+        <div className="mb-2">
           <label htmlFor='gameName'>Game Name:
             <input type="text" id="gameName" name="gameName" placeholder="Joust.." required />
           </label>
         </div>
-        <div>
+        <div className="mb-2">
           <label htmlFor='platform'>Platform:
             <input type="text" id="platform" name="platform" placeholder="Atari 2600..." required />
           </label>
         </div>
-        <div>
+        <div className="mb-2">
           <label htmlFor='category'>Category:
             <input type="text" id="category" name="category" placeholder="Any%..." />
           </label>
         </div>
-        <div>
+        <div className="mb-2">
           <label htmlFor='startDate'>Start On:
             <input type="date" id="startDate" name="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
           </label>
@@ -50,7 +50,7 @@ const NewGameForm = ({ league }: { league: League }) => {
             </select>
           </label>
         </div>
-        <div>
+        <div className="mb-2">
           <label htmlFor='endDate'>End On:
             <input type="date" id="endDate" name="endDate" value={defaultEndDate} onChange={(e) => setDefaultEndDate(e.target.value)} />
           </label>

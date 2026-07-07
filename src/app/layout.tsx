@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar/NavBar";
+import Footer from "@/components/Footer/Footer";
 
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -22,9 +23,10 @@ export default function RootLayout({
       lang="en"
       className={`${jetBrainsMono.className} h-full antialiased`}
     >
-      <body className="grid grid-cols-12 gap-x-2 gap-y-2 bg-slate-100">
+      <body className="grid h-full auto-rows-[auto_1fr_auto] gap-x-2 gap-y-2 bg-slate-100">
         <NavBar />
-        {children}
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

@@ -29,4 +29,21 @@
   h6 {
     font-size: 20px;
   }
+
+  a {
+    color: blue;
+  }
+
+  input {
+    background: var(--color-slate-100);
+    border-radius: 2px;
+    filter: drop-shadow(1px 1px 1px);
+  }
+
+  button {
+    border-radius: 2px;
+    filter: drop-shadow(1px 1px 1px);
+    background: var(--color-slate-100);
+    padding: 5px;
+  }
 }

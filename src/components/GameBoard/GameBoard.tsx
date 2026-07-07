@@ -10,9 +10,8 @@ export default async function GameBoard({ game }: { game: Game }) {
   const session = await auth.api.getSession({
     headers: await headers()
   });
-  const beginTime = game.begin ?? null;
   const endTime = game.end ?? null;
-  //console.log(Math.floor(game.begin.getTime() / 1000));
+  const isFinished = endTime ? (Date.now() - endTime.getTime() >= 0) : false;
 
   const scores = await prisma.score.findMany({
     where: { gameId: game.id },
@@ -35,7 +34,7 @@ export default async function GameBoard({ game }: { game: Game }) {
         {game.category && <h4 className='flex-1 text-left content-center'>{game.category}</h4>}
         {endTime && <p className='flex-1 text-right content-center'>Ends: {endTime.toLocaleString()}</p>}
       </div>
-      <div className="rounded-sm p-2 shadow-md">
+      <div className="rounded-sm p-2 drop-shadow-md">
         <table className="table-fixed w-full">
           <thead>
             <tr>
@@ -53,7 +52,7 @@ export default async function GameBoard({ game }: { game: Game }) {
           </tbody>
         </table>
       </div >
-      {isPlayer && <SubmitScore gameId={game.id} />
+      {isPlayer && !isFinished && <SubmitScore gameId={game.id} />
       }
     </div >
   );
