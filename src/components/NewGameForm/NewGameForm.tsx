@@ -17,27 +17,27 @@ const NewGameForm = ({ league }: { league: League }) => {
   const defaultEndMins = weekDate.getMinutes();
 
   return (
-    <div className="drop-shadow-sm p-5 m-5 bg-white">
+    <div className="drop-shadow-sm p-5 bg-white flex flex-col gap-2">
       <h3>Create New Game</h3>
-      <Form action={createGame}>
-        <div className="mb-2">
-          <label htmlFor='gameName'>Game Name:
-            <input type="text" id="gameName" name="gameName" placeholder="Joust.." required />
+      <Form action={createGame} className="flex flex-col gap-5">
+        <div>
+          <label htmlFor='gameName'>
+            <input className="w-full" type="text" id="gameName" name="gameName" placeholder="Game Name" required />
           </label>
         </div>
-        <div className="mb-2">
-          <label htmlFor='platform'>Platform:
-            <input type="text" id="platform" name="platform" placeholder="Atari 2600..." required />
+        <div>
+          <label htmlFor='platform'>
+            <input className="w-full" type="text" id="platform" name="platform" placeholder="Platform (SNES, PC, etc)" required />
           </label>
         </div>
-        <div className="mb-2">
-          <label htmlFor='category'>Category:
-            <input type="text" id="category" name="category" placeholder="Any%..." />
+        <div>
+          <label htmlFor='category'>
+            <input className="w-full" type="text" id="category" name="category" placeholder="Category (Any%, etc)" />
           </label>
         </div>
-        <div className="mb-2">
+        <div>
           <label htmlFor='startDate'>Start On:
-            <input type="date" id="startDate" name="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+            <input className="w-full" type="date" id="startDate" name="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
           </label>
           <label htmlFor='startHour'>at:
             <select name="startHour" defaultValue={currentHour}>
@@ -50,9 +50,9 @@ const NewGameForm = ({ league }: { league: League }) => {
             </select>
           </label>
         </div>
-        <div className="mb-2">
+        <div >
           <label htmlFor='endDate'>End On:
-            <input type="date" id="endDate" name="endDate" value={defaultEndDate} onChange={(e) => setDefaultEndDate(e.target.value)} />
+            <input className="w-full" type="date" id="endDate" name="endDate" value={defaultEndDate} onChange={(e) => setDefaultEndDate(e.target.value)} />
           </label>
           <label htmlFor='endHour'>at:
             <select name="endHour" defaultValue={defaultEndHour}>
@@ -68,7 +68,7 @@ const NewGameForm = ({ league }: { league: League }) => {
         <input type="hidden" id="tzOffset" name="tzOffset" value={date.getTimezoneOffset()} />
         <input type="hidden" id="leagueId" name="leagueId" value={league.id} />
         <div>
-          <button >Create Game</button>
+          <button className="w-full">Create Game</button>
         </div>
       </Form>
     </div >

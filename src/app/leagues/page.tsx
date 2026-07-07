@@ -13,10 +13,10 @@ export default async function LeaguePage() {
   }
   const { user } = session;
   return (
-    <div className='col-span-12 bg-slate-100 grid grid-cols-12 gap-x-2 gap-y-2'>
-      <div className='col-span-3'>2</div>
-      < LeagueList userId={user.id} />
-      <div className='col-span-3'>5</div>
+    <div className='flex m-5 justify-center'>
+      <div className="w-2/3">
+        <LeagueList userId={user.id} />
+      </div>
     </div >
   )
 }

@@ -5,7 +5,7 @@ import PlayerList from "@/components/PlayerList/PlayerList";
 
 const LeagueInfo = ({ league, players, isAdmin }: { league: League, players: Array<User>, isAdmin: boolean }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <PlayerList players={players} />
       {isAdmin && <NewGameForm league={league} />}
       {isAdmin && <InvitePlayer leagueId={league.id} />}

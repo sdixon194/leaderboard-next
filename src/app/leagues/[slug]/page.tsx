@@ -23,8 +23,11 @@ export default async function LeaguePage({
   const games = await prisma.game.findMany({
     where: {
       leagueId: league.id
+    },
+    orderBy: {
+      updatedAt: "desc"
     }
-  })
+  });
 
   const players = await prisma.leaguePlayers.findMany({
     where: { leagueId: league.id },
