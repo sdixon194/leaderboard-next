@@ -15,7 +15,7 @@ export default async function DashboardPage() {
   }
 
   const { user } = session;
-  const leagueObject = await prisma.leaguePlayers.findMany({
+  const leagueObject = await prisma.usersOnLeagues.findMany({
     where: { userId: user.id },
     select: {
       league: {

@@ -29,7 +29,7 @@ export default async function LeaguePage({
     }
   });
 
-  const players = await prisma.leaguePlayers.findMany({
+  const players = await prisma.usersOnLeagues.findMany({
     where: { leagueId: league.id },
     select: {
       user: true,

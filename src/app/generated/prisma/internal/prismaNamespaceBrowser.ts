@@ -79,12 +79,12 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UserScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
   image: 'image',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  name: 'name'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -161,10 +161,10 @@ export const GameScalarFieldEnum = {
   category: 'category',
   platform: 'platform',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
   leagueId: 'leagueId',
   begin: 'begin',
-  end: 'end'
+  end: 'end',
+  updatedAt: 'updatedAt'
 } as const
 
 export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
@@ -172,11 +172,11 @@ export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof Game
 
 export const ScoreScalarFieldEnum = {
   id: 'id',
-  score: 'score',
   playerId: 'playerId',
   gameId: 'gameId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  score: 'score'
 } as const
 
 export type ScoreScalarFieldEnum = (typeof ScoreScalarFieldEnum)[keyof typeof ScoreScalarFieldEnum]

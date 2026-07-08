@@ -22,7 +22,7 @@ export default async function GameBoard({ game }: { game: Game }) {
     include: { player: true }
   })
 
-  const players = await prisma.leaguePlayers.findMany({
+  const players = await prisma.usersOnLeagues.findMany({
     where: { leagueId: game.leagueId }
   });
   const isPlayer = players.some(p => p.userId === session?.user.id);
