@@ -33,12 +33,12 @@ const GameTopLine = async ({ game }: { game: Game }) => {
     },
     include: { player: true }
   });
-
+  console.log(scores);
   return (
     <div className="flex gap-3">
       <p className="flex-2">{game.name}<span className="text-sm">{`(${game.category})`}</span></p>
-      <p className='flex-1'>{scores[0].player.name}</p>
-      <p className='flex-1'>{scores[0].score.toLocaleString()}</p>
+      <p className='flex-1'>{scores.length > 0 ? scores[0].player.name : 'No Scores'}</p>
+      <p className='flex-1'>{scores.length > 0 && scores[0].score.toLocaleString()}</p>
       <p className="flex-1">{game.end?.toLocaleDateString()}</p>
     </div>
   )

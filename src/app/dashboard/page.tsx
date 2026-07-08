@@ -12,6 +12,7 @@ export default async function DashboardPage() {
   if (!session) {
     redirect('/sign-in');
   }
+  console.log(session.user);
   const { user } = session;
   return (
     <div className="m-5 flex flex-col gap-5">
