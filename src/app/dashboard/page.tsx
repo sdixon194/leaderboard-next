@@ -22,7 +22,7 @@ export default async function DashboardPage() {
       </div>
       <div className="p-5 flex gap-5">
         <div className="p-5 rounded-sm drop-shadow-md bg-white flex-1">
-          <h2>Create New League!</h2>
+          <h2>Create New League</h2>
           <NewLeagueForm ownerId={user.id} />
         </div>
         <div className="p-5 rounded-sm drop-shadow-md bg-white flex-2">
