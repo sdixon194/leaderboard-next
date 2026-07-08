@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Leaderboard
+(Exact name TBD)
+
+This is an open source leaderboard application you can use to track scores amongst your friend group as you compete to see who is the best. It's currently in what I'd call a pre-alpha state. 
+
+<img width="719" height="530" alt="Screenshot 2026-07-08 at 9 40 46 AM" src="https://github.com/user-attachments/assets/9010c21c-fdd9-49a8-a955-d9b2df645e04" />
 
 ## Getting Started
 
-First, run the development server:
+- First, sign up for a new account
+- In your dashboard, create a new league.
+- From your league, create a new game and set the duration for when the competition should end.
+- Invite other users via their email.
+- Start submitting scores!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Current State
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This is in a pre-alpha state. The core application works, but many basic features are still under development. For example, there's no way to delete or edit a game or leaderboard, or a way to reset user password. Check out the GitHub issues to follow the status of various feature development. 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Developing Locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Setup your database by creating a new Postgres DB in Docker.
+- Add an .env file to the root of the project and add your DATABASE_URL, e.g `DATABASE_URL="postgresql://postgres:postgres@localhost:5432/leaderboard-next"`
+- Run `pnpm dev` to start the application.
+- Open [http://localhost:3000](http://localhost:3000) to pull up the application. 
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
