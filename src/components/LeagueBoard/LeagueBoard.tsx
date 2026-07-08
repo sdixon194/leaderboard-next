@@ -33,7 +33,7 @@ const GameTopLine = async ({ game }: { game: Game }) => {
     },
     include: { player: true }
   });
-  console.log(scores);
+
   return (
     <div className="flex gap-3">
       <p className="flex-2">{game.name}<span className="text-sm">{`(${game.category})`}</span></p>

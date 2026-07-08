@@ -13,24 +13,24 @@ datasource db {
 }
 
 model User {
-  id            String          @id
+  id            String           @id
   name          String
   email         String
-  emailVerified Boolean         @default(false)
+  emailVerified Boolean          @default(false)
   image         String?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
   sessions      Session[]
   accounts      Account[]
   scores        Score[]
-  joinedLeagues LeaguePlayers[]
-  ownedLeagues  League[]        @relation("OwnedLeagues")
+  joinedLeagues UsersOnLeagues[]
+  ownedLeagues  League[]         @relation("OwnedLeagues")
 
   @@unique([email])
   @@map("user")
 }
 
-model LeaguePlayers {
+model UsersOnLeagues {
   leagueId String
   userId   String
   role     Role   @default(PLAYER)
@@ -90,14 +90,14 @@ model Verification {
 }
 
 model League {
-  id        String          @id @default(uuid())
+  id        String           @id @default(uuid())
   name      String
-  owner     User            @relation("OwnedLeagues", fields: [ownerId], references: [id])
+  owner     User             @relation("OwnedLeagues", fields: [ownerId], references: [id])
   ownerId   String
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
   games     Game[]
-  players   LeaguePlayers[]
+  players   UsersOnLeagues[]
 
   @@map("league")
 }

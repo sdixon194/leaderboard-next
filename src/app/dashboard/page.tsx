@@ -1,6 +1,7 @@
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from "next/navigation";
+import prisma from '@/lib/prisma';
 import NewLeagueForm from "@/components/NewLeagueForm/NewLeagueForm";
 import LeagueList from "@/components/LeagueList/LeagueList";
 
@@ -12,8 +13,38 @@ export default async function DashboardPage() {
   if (!session) {
     redirect('/sign-in');
   }
-  console.log(session.user);
+
   const { user } = session;
+  const leagueObject = await prisma.leaguePlayers.findMany({
+    where: { userId: user.id },
+    select: {
+      league: {
+        include: {
+          games: {
+            include: {
+              scores: {
+                orderBy: {
+                  score: "desc",
+                },
+                take: 1,
+              },
+            },
+            orderBy: {
+              begin: "desc",
+            },
+            take: 5,
+          },
+        },
+      },
+    }
+  });
+
+  const leagues = await prisma.league.findMany({
+    where: {}
+  })
+
+
+  console.log(leagueObject);
   return (
     <div className="m-5 flex flex-col gap-5">
       <div className="mx-5 p-5 rounded-sm drop-shadow-md bg-white">
@@ -27,7 +58,7 @@ export default async function DashboardPage() {
         </div>
         <div className="p-5 rounded-sm drop-shadow-md bg-white flex-2">
           <h2>My Leagues</h2>
-          <LeagueList userId={user.id} />
+          <LeagueList leagues={leagueObject} />
         </div>
       </div>
     </div >

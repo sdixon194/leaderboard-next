@@ -52,7 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  LeaguePlayers: 'LeaguePlayers',
+  UsersOnLeagues: 'UsersOnLeagues',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
@@ -90,13 +90,13 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const LeaguePlayersScalarFieldEnum = {
+export const UsersOnLeaguesScalarFieldEnum = {
   leagueId: 'leagueId',
   userId: 'userId',
   role: 'role'
 } as const
 
-export type LeaguePlayersScalarFieldEnum = (typeof LeaguePlayersScalarFieldEnum)[keyof typeof LeaguePlayersScalarFieldEnum]
+export type UsersOnLeaguesScalarFieldEnum = (typeof UsersOnLeaguesScalarFieldEnum)[keyof typeof UsersOnLeaguesScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {

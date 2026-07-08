@@ -201,7 +201,7 @@ export type UserWhereInput = {
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   scores?: Prisma.ScoreListRelationFilter
-  joinedLeagues?: Prisma.LeaguePlayersListRelationFilter
+  joinedLeagues?: Prisma.UsersOnLeaguesListRelationFilter
   ownedLeagues?: Prisma.LeagueListRelationFilter
 }
 
@@ -216,7 +216,7 @@ export type UserOrderByWithRelationInput = {
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   scores?: Prisma.ScoreOrderByRelationAggregateInput
-  joinedLeagues?: Prisma.LeaguePlayersOrderByRelationAggregateInput
+  joinedLeagues?: Prisma.UsersOnLeaguesOrderByRelationAggregateInput
   ownedLeagues?: Prisma.LeagueOrderByRelationAggregateInput
 }
 
@@ -234,7 +234,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   scores?: Prisma.ScoreListRelationFilter
-  joinedLeagues?: Prisma.LeaguePlayersListRelationFilter
+  joinedLeagues?: Prisma.UsersOnLeaguesListRelationFilter
   ownedLeagues?: Prisma.LeagueListRelationFilter
 }, "id" | "email">
 
@@ -275,7 +275,7 @@ export type UserCreateInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   scores?: Prisma.ScoreCreateNestedManyWithoutPlayerInput
-  joinedLeagues?: Prisma.LeaguePlayersCreateNestedManyWithoutUserInput
+  joinedLeagues?: Prisma.UsersOnLeaguesCreateNestedManyWithoutUserInput
   ownedLeagues?: Prisma.LeagueCreateNestedManyWithoutOwnerInput
 }
 
@@ -290,7 +290,7 @@ export type UserUncheckedCreateInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutPlayerInput
-  joinedLeagues?: Prisma.LeaguePlayersUncheckedCreateNestedManyWithoutUserInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUncheckedCreateNestedManyWithoutUserInput
   ownedLeagues?: Prisma.LeagueUncheckedCreateNestedManyWithoutOwnerInput
 }
 
@@ -305,7 +305,7 @@ export type UserUpdateInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   scores?: Prisma.ScoreUpdateManyWithoutPlayerNestedInput
-  joinedLeagues?: Prisma.LeaguePlayersUpdateManyWithoutUserNestedInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUpdateManyWithoutUserNestedInput
   ownedLeagues?: Prisma.LeagueUpdateManyWithoutOwnerNestedInput
 }
 
@@ -320,7 +320,7 @@ export type UserUncheckedUpdateInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutPlayerNestedInput
-  joinedLeagues?: Prisma.LeaguePlayersUncheckedUpdateManyWithoutUserNestedInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUncheckedUpdateManyWithoutUserNestedInput
   ownedLeagues?: Prisma.LeagueUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
@@ -557,7 +557,7 @@ export type UserCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   scores?: Prisma.ScoreCreateNestedManyWithoutPlayerInput
-  joinedLeagues?: Prisma.LeaguePlayersCreateNestedManyWithoutUserInput
+  joinedLeagues?: Prisma.UsersOnLeaguesCreateNestedManyWithoutUserInput
   ownedLeagues?: Prisma.LeagueCreateNestedManyWithoutOwnerInput
 }
 
@@ -571,7 +571,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutPlayerInput
-  joinedLeagues?: Prisma.LeaguePlayersUncheckedCreateNestedManyWithoutUserInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUncheckedCreateNestedManyWithoutUserInput
   ownedLeagues?: Prisma.LeagueUncheckedCreateNestedManyWithoutOwnerInput
 }
 
@@ -601,7 +601,7 @@ export type UserUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   scores?: Prisma.ScoreUpdateManyWithoutPlayerNestedInput
-  joinedLeagues?: Prisma.LeaguePlayersUpdateManyWithoutUserNestedInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUpdateManyWithoutUserNestedInput
   ownedLeagues?: Prisma.LeagueUpdateManyWithoutOwnerNestedInput
 }
 
@@ -615,7 +615,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutPlayerNestedInput
-  joinedLeagues?: Prisma.LeaguePlayersUncheckedUpdateManyWithoutUserNestedInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUncheckedUpdateManyWithoutUserNestedInput
   ownedLeagues?: Prisma.LeagueUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
@@ -629,7 +629,7 @@ export type UserCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   scores?: Prisma.ScoreCreateNestedManyWithoutPlayerInput
-  joinedLeagues?: Prisma.LeaguePlayersCreateNestedManyWithoutUserInput
+  joinedLeagues?: Prisma.UsersOnLeaguesCreateNestedManyWithoutUserInput
   ownedLeagues?: Prisma.LeagueCreateNestedManyWithoutOwnerInput
 }
 
@@ -643,7 +643,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutPlayerInput
-  joinedLeagues?: Prisma.LeaguePlayersUncheckedCreateNestedManyWithoutUserInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUncheckedCreateNestedManyWithoutUserInput
   ownedLeagues?: Prisma.LeagueUncheckedCreateNestedManyWithoutOwnerInput
 }
 
@@ -673,7 +673,7 @@ export type UserUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   scores?: Prisma.ScoreUpdateManyWithoutPlayerNestedInput
-  joinedLeagues?: Prisma.LeaguePlayersUpdateManyWithoutUserNestedInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUpdateManyWithoutUserNestedInput
   ownedLeagues?: Prisma.LeagueUpdateManyWithoutOwnerNestedInput
 }
 
@@ -687,7 +687,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutPlayerNestedInput
-  joinedLeagues?: Prisma.LeaguePlayersUncheckedUpdateManyWithoutUserNestedInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUncheckedUpdateManyWithoutUserNestedInput
   ownedLeagues?: Prisma.LeagueUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
@@ -702,7 +702,7 @@ export type UserCreateWithoutOwnedLeaguesInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   scores?: Prisma.ScoreCreateNestedManyWithoutPlayerInput
-  joinedLeagues?: Prisma.LeaguePlayersCreateNestedManyWithoutUserInput
+  joinedLeagues?: Prisma.UsersOnLeaguesCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedLeaguesInput = {
@@ -716,7 +716,7 @@ export type UserUncheckedCreateWithoutOwnedLeaguesInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutPlayerInput
-  joinedLeagues?: Prisma.LeaguePlayersUncheckedCreateNestedManyWithoutUserInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedLeaguesInput = {
@@ -746,7 +746,7 @@ export type UserUpdateWithoutOwnedLeaguesInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   scores?: Prisma.ScoreUpdateManyWithoutPlayerNestedInput
-  joinedLeagues?: Prisma.LeaguePlayersUpdateManyWithoutUserNestedInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedLeaguesInput = {
@@ -760,7 +760,7 @@ export type UserUncheckedUpdateWithoutOwnedLeaguesInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutPlayerNestedInput
-  joinedLeagues?: Prisma.LeaguePlayersUncheckedUpdateManyWithoutUserNestedInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutScoresInput = {
@@ -773,7 +773,7 @@ export type UserCreateWithoutScoresInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  joinedLeagues?: Prisma.LeaguePlayersCreateNestedManyWithoutUserInput
+  joinedLeagues?: Prisma.UsersOnLeaguesCreateNestedManyWithoutUserInput
   ownedLeagues?: Prisma.LeagueCreateNestedManyWithoutOwnerInput
 }
 
@@ -787,7 +787,7 @@ export type UserUncheckedCreateWithoutScoresInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  joinedLeagues?: Prisma.LeaguePlayersUncheckedCreateNestedManyWithoutUserInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUncheckedCreateNestedManyWithoutUserInput
   ownedLeagues?: Prisma.LeagueUncheckedCreateNestedManyWithoutOwnerInput
 }
 
@@ -817,7 +817,7 @@ export type UserUpdateWithoutScoresInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  joinedLeagues?: Prisma.LeaguePlayersUpdateManyWithoutUserNestedInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUpdateManyWithoutUserNestedInput
   ownedLeagues?: Prisma.LeagueUpdateManyWithoutOwnerNestedInput
 }
 
@@ -831,7 +831,7 @@ export type UserUncheckedUpdateWithoutScoresInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  joinedLeagues?: Prisma.LeaguePlayersUncheckedUpdateManyWithoutUserNestedInput
+  joinedLeagues?: Prisma.UsersOnLeaguesUncheckedUpdateManyWithoutUserNestedInput
   ownedLeagues?: Prisma.LeagueUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
@@ -891,7 +891,7 @@ export type UserCountOutputTypeCountScoresArgs<ExtArgs extends runtime.Types.Ext
  * UserCountOutputType without action
  */
 export type UserCountOutputTypeCountJoinedLeaguesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeaguePlayersWhereInput
+  where?: Prisma.UsersOnLeaguesWhereInput
 }
 
 /**
@@ -966,7 +966,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
     scores: Prisma.$ScorePayload<ExtArgs>[]
-    joinedLeagues: Prisma.$LeaguePlayersPayload<ExtArgs>[]
+    joinedLeagues: Prisma.$UsersOnLeaguesPayload<ExtArgs>[]
     ownedLeagues: Prisma.$LeaguePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1374,7 +1374,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   scores<T extends Prisma.User$scoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  joinedLeagues<T extends Prisma.User$joinedLeaguesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$joinedLeaguesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeaguePlayersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  joinedLeagues<T extends Prisma.User$joinedLeaguesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$joinedLeaguesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsersOnLeaguesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ownedLeagues<T extends Prisma.User$ownedLeaguesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedLeaguesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeaguePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1881,23 +1881,23 @@ export type User$scoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
  */
 export type User$joinedLeaguesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the LeaguePlayers
+   * Select specific fields to fetch from the UsersOnLeagues
    */
-  select?: Prisma.LeaguePlayersSelect<ExtArgs> | null
+  select?: Prisma.UsersOnLeaguesSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the LeaguePlayers
+   * Omit specific fields from the UsersOnLeagues
    */
-  omit?: Prisma.LeaguePlayersOmit<ExtArgs> | null
+  omit?: Prisma.UsersOnLeaguesOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LeaguePlayersInclude<ExtArgs> | null
-  where?: Prisma.LeaguePlayersWhereInput
-  orderBy?: Prisma.LeaguePlayersOrderByWithRelationInput | Prisma.LeaguePlayersOrderByWithRelationInput[]
-  cursor?: Prisma.LeaguePlayersWhereUniqueInput
+  include?: Prisma.UsersOnLeaguesInclude<ExtArgs> | null
+  where?: Prisma.UsersOnLeaguesWhereInput
+  orderBy?: Prisma.UsersOnLeaguesOrderByWithRelationInput | Prisma.UsersOnLeaguesOrderByWithRelationInput[]
+  cursor?: Prisma.UsersOnLeaguesWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.LeaguePlayersScalarFieldEnum | Prisma.LeaguePlayersScalarFieldEnum[]
+  distinct?: Prisma.UsersOnLeaguesScalarFieldEnum | Prisma.UsersOnLeaguesScalarFieldEnum[]
 }
 
 /**

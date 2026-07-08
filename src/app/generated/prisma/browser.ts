@@ -23,10 +23,10 @@ export * from './enums';
  */
 export type User = Prisma.UserModel
 /**
- * Model LeaguePlayers
+ * Model UsersOnLeagues
  * 
  */
-export type LeaguePlayers = Prisma.LeaguePlayersModel
+export type UsersOnLeagues = Prisma.UsersOnLeaguesModel
 /**
  * Model Session
  * 
