@@ -13,10 +13,17 @@ export async function sendInvite(formData: FormData) {
     redirect(`/leagues/${leagueId}`, RedirectType.replace)
   }
 
-  await prisma.leaguePlayers.create({
+  await prisma.league.update({
+    where: {
+      id: leagueId
+    },
     data: {
-      userId: user.id,
-      leagueId: leagueId
+      players: {
+        connect: [{ id: user.id }]
+      },
+      leagueRoles: {
+        create: [{ playerId: user.id, role: 'PLAYER' }]
+      }
     }
   });
   redirect(`/leagues/${leagueId}`, RedirectType.replace)
