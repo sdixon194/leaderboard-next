@@ -1,19 +1,13 @@
 'use client'
+import { User } from "@/app/generated/prisma/client";
 import Form from "next/form";
 import { useState } from "react";
 import { submitScore } from './actions';
-import { authClient } from "@/lib/auth-client";
 import { usePathname } from 'next/navigation';
 
-const SubmitScore = ({ gameId }: { gameId: string }) => {
+const SubmitScore = ({ gameId, user }: { gameId: string, user: User }) => {
   const pathName = usePathname();
   const [score, setScore] = useState('')
-  const { data: session } = authClient.useSession();
-
-  if (!session?.user)
-    return <p className="text-center mt-8">Sign in to Submit Score</p>;
-
-  const { user } = session;
 
   const handleScoreChange = (value: string) => {
     setScore(value)

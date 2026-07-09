@@ -22,10 +22,20 @@ export default async function LeaguePage() {
       }
     },
     include: {
-      games: true,
-      players: true
+      games: {
+        include: {
+          scores: {
+            distinct: ['playerId'],
+            orderBy: {
+              score: 'desc',
+            },
+            include: { player: true }
+          }
+        }
+      }
     }
   })
+
   return (
     <div className="flex m-5 justify-center">
       <div className="w-2/3">
