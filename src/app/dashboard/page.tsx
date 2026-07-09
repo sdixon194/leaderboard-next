@@ -34,8 +34,12 @@ export default async function DashboardPage() {
             },
             include: { player: true }
           }
-        }
-      }
+        },
+        orderBy: {
+          updatedAt: "desc"
+        },
+        take: 5
+      },
     }
   })
 

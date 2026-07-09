@@ -31,7 +31,11 @@ export default async function LeaguePage() {
             },
             include: { player: true }
           }
-        }
+        },
+        orderBy: {
+          updatedAt: "desc"
+        },
+        take: 5
       }
     }
   })
