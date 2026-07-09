@@ -1,7 +1,14 @@
-import { Game, User } from "@/app/generated/prisma/client"
+import { Game, User, Score } from "@/app/generated/prisma/client"
 import GameBoard from "../GameBoard/GameBoard";
 
-const GameList = ({ games, currentPlayer }: { games: Array<Game>, currentPlayer: User | null }) => {
+type ScoreType = Score & {
+  player: User
+}
+type GameType = Game & {
+  scores: Array<ScoreType>
+}
+
+const GameList = ({ games, currentPlayer }: { games: Array<GameType>, currentPlayer: User | null }) => {
   if (!games) {
     return (<p>No games found!</p>)
   }

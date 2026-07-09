@@ -11,7 +11,7 @@ type LeagueType = League & {
   games: Array<GameType>
 }
 
-export default async function LeagueList({ leagues }: { leagues: Array<LeagueType> }) {
+export default function LeagueList({ leagues }: { leagues: Array<LeagueType> }) {
   return (
     <div className="col-span-6 p-5 bg-white">
       {leagues.map(league => <LeagueBoard league={league} key={league.id} />)}
