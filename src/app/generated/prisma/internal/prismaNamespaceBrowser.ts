@@ -52,13 +52,13 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  LeaguePlayers: 'LeaguePlayers',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
   League: 'League',
   Game: 'Game',
-  Score: 'Score'
+  Score: 'Score',
+  LeagueRole: 'LeagueRole'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -88,15 +88,6 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const LeaguePlayersScalarFieldEnum = {
-  leagueId: 'leagueId',
-  userId: 'userId',
-  role: 'role'
-} as const
-
-export type LeaguePlayersScalarFieldEnum = (typeof LeaguePlayersScalarFieldEnum)[keyof typeof LeaguePlayersScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
@@ -180,6 +171,16 @@ export const ScoreScalarFieldEnum = {
 } as const
 
 export type ScoreScalarFieldEnum = (typeof ScoreScalarFieldEnum)[keyof typeof ScoreScalarFieldEnum]
+
+
+export const LeagueRoleScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  leagueId: 'leagueId',
+  role: 'role'
+} as const
+
+export type LeagueRoleScalarFieldEnum = (typeof LeagueRoleScalarFieldEnum)[keyof typeof LeagueRoleScalarFieldEnum]
 
 
 export const SortOrder = {

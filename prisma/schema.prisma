@@ -13,32 +13,22 @@ datasource db {
 }
 
 model User {
-  id            String          @id
+  id            String       @id
   name          String
   email         String
-  emailVerified Boolean         @default(false)
+  emailVerified Boolean      @default(false)
   image         String?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   sessions      Session[]
   accounts      Account[]
   scores        Score[]
-  joinedLeagues LeaguePlayers[]
-  ownedLeagues  League[]        @relation("OwnedLeagues")
+  leagues       League[]
+  ownedLeagues  League[]     @relation("OwnedLeagues")
+  leagueRoles   LeagueRole[]
 
   @@unique([email])
   @@map("user")
-}
-
-model LeaguePlayers {
-  leagueId String
-  userId   String
-  role     Role   @default(PLAYER)
-  league   League @relation(fields: [leagueId], references: id)
-  user     User   @relation(fields: [userId], references: id)
-
-  @@id([userId, leagueId])
-  @@map("league_players")
 }
 
 model Session {
@@ -90,14 +80,15 @@ model Verification {
 }
 
 model League {
-  id        String          @id @default(uuid())
-  name      String
-  owner     User            @relation("OwnedLeagues", fields: [ownerId], references: [id])
-  ownerId   String
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
-  games     Game[]
-  players   LeaguePlayers[]
+  id          String       @id @default(uuid())
+  name        String
+  owner       User         @relation("OwnedLeagues", fields: [ownerId], references: [id])
+  ownerId     String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  games       Game[]
+  players     User[]
+  leagueRoles LeagueRole[]
 
   @@map("league")
 }
@@ -131,7 +122,18 @@ model Score {
   @@map("score")
 }
 
+model LeagueRole {
+  id       String @id @default(uuid())
+  player   User   @relation(fields: [playerId], references: [id])
+  playerId String
+  league   League @relation(fields: [leagueId], references: [id])
+  leagueId String
+  role     Role
+}
+
 enum Role {
   ADMIN
   PLAYER
+  OWNER
+  VIEWER
 }

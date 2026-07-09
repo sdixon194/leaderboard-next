@@ -1,26 +1,20 @@
+import { League, Score, Game, User } from '@/app/generated/prisma/client';
 import LeagueBoard from '@/components/LeagueBoard/LeagueBoard'
-import prisma from '@/lib/prisma';
 
-export default async function LeagueList({ userId }: { userId: string }) {
-  const leagueObject = await prisma.leaguePlayers.findMany({
-    where: { userId: userId },
-    select: {
-      league: {
-        include: {
-          games: {
-            orderBy: {
-              begin: "desc",
-            },
-            take: 5,
-          },
-        },
-      },
-    }
-  });
+type ScoreType = Score & {
+  player: User
+}
+type GameType = Game & {
+  scores: Array<ScoreType>
+}
+type LeagueType = League & {
+  games: Array<GameType>
+}
 
+export default function LeagueList({ leagues }: { leagues: Array<LeagueType> }) {
   return (
     <div className="col-span-6 p-5 bg-white">
-      {leagueObject.map(league => <LeagueBoard league={league} key={league.league.id} />)}
+      {leagues.map(league => <LeagueBoard league={league} key={league.id} />)}
     </div>);
 }
 

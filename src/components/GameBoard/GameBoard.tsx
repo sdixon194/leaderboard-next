@@ -1,31 +1,16 @@
-"use server";
 import SubmitScore from "@/components/SubmitScore";
-import { Game } from "@/app/generated/prisma/client";
-import prisma from "@/lib/prisma";
+import { Game, Score, User } from "@/app/generated/prisma/client";
 import PlayerScore from "../PlayerScore/PlayerScore";
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 
-export default async function GameBoard({ game }: { game: Game }) {
-  const session = await auth.api.getSession({
-    headers: await headers()
-  });
+type ScoreType = Score & {
+  player: User
+}
+type GameType = Game & {
+  scores: Array<ScoreType>
+}
+export default function GameBoard({ game, currentPlayer }: { game: GameType, currentPlayer: User | null }) {
   const endTime = game.end ?? null;
   const isFinished = endTime ? (Date.now() - endTime.getTime() >= 0) : false;
-
-  const scores = await prisma.score.findMany({
-    where: { gameId: game.id },
-    distinct: ['playerId'],
-    orderBy: {
-      score: 'desc',
-    },
-    include: { player: true }
-  })
-
-  const players = await prisma.leaguePlayers.findMany({
-    where: { leagueId: game.leagueId }
-  });
-  const isPlayer = players.some(p => p.userId === session?.user.id);
 
   return (
     <div className="border rounded-sm p-5 m-5 max-w-300">
@@ -45,14 +30,14 @@ export default async function GameBoard({ game }: { game: Game }) {
           </thead>
           <tbody className="[&>*:nth-child(odd)]:bg-slate-100 [&>*:nth-child(even)]:bg-blue-100">
             {
-              scores.map((score) =>
+              game.scores.map((score) =>
                 <PlayerScore score={score.score} player={score.player.name} date={score.createdAt} key={score.id} />
               )
             }
           </tbody>
         </table>
       </div >
-      {isPlayer && !isFinished && <SubmitScore gameId={game.id} />
+      {currentPlayer && !isFinished && <SubmitScore gameId={game.id} user={currentPlayer} />
       }
     </div >
   );

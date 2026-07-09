@@ -23,11 +23,6 @@ export * from './enums';
  */
 export type User = Prisma.UserModel
 /**
- * Model LeaguePlayers
- * 
- */
-export type LeaguePlayers = Prisma.LeaguePlayersModel
-/**
  * Model Session
  * 
  */
@@ -57,3 +52,8 @@ export type Game = Prisma.GameModel
  * 
  */
 export type Score = Prisma.ScoreModel
+/**
+ * Model LeagueRole
+ * 
+ */
+export type LeagueRole = Prisma.LeagueRoleModel
