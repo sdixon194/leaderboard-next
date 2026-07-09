@@ -1,4 +1,3 @@
-"use server";
 import SubmitScore from "@/components/SubmitScore";
 import { Game } from "@/app/generated/prisma/client";
 import prisma from "@/lib/prisma";
@@ -12,20 +11,6 @@ export default async function GameBoard({ game }: { game: Game }) {
   });
   const endTime = game.end ?? null;
   const isFinished = endTime ? (Date.now() - endTime.getTime() >= 0) : false;
-
-  const scores = await prisma.score.findMany({
-    where: { gameId: game.id },
-    distinct: ['playerId'],
-    orderBy: {
-      score: 'desc',
-    },
-    include: { player: true }
-  })
-
-  const players = await prisma.usersOnLeagues.findMany({
-    where: { leagueId: game.leagueId }
-  });
-  const isPlayer = players.some(p => p.userId === session?.user.id);
 
   return (
     <div className="border rounded-sm p-5 m-5 max-w-300">
@@ -45,14 +30,14 @@ export default async function GameBoard({ game }: { game: Game }) {
           </thead>
           <tbody className="[&>*:nth-child(odd)]:bg-slate-100 [&>*:nth-child(even)]:bg-blue-100">
             {
-              scores.map((score) =>
+              game.scores.map((score) =>
                 <PlayerScore score={score.score} player={score.player.name} date={score.createdAt} key={score.id} />
               )
             }
           </tbody>
         </table>
       </div >
-      {isPlayer && !isFinished && <SubmitScore gameId={game.id} />
+      {<SubmitScore gameId={game.id} />
       }
     </div >
   );

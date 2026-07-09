@@ -52,13 +52,13 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  UsersOnLeagues: 'UsersOnLeagues',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
   League: 'League',
   Game: 'Game',
-  Score: 'Score'
+  Score: 'Score',
+  LeagueRole: 'LeagueRole'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -79,24 +79,15 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UserScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
   image: 'image',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  name: 'name'
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const UsersOnLeaguesScalarFieldEnum = {
-  leagueId: 'leagueId',
-  userId: 'userId',
-  role: 'role'
-} as const
-
-export type UsersOnLeaguesScalarFieldEnum = (typeof UsersOnLeaguesScalarFieldEnum)[keyof typeof UsersOnLeaguesScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
@@ -161,10 +152,10 @@ export const GameScalarFieldEnum = {
   category: 'category',
   platform: 'platform',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   leagueId: 'leagueId',
   begin: 'begin',
-  end: 'end',
-  updatedAt: 'updatedAt'
+  end: 'end'
 } as const
 
 export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
@@ -172,14 +163,24 @@ export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof Game
 
 export const ScoreScalarFieldEnum = {
   id: 'id',
+  score: 'score',
   playerId: 'playerId',
   gameId: 'gameId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  score: 'score'
+  updatedAt: 'updatedAt'
 } as const
 
 export type ScoreScalarFieldEnum = (typeof ScoreScalarFieldEnum)[keyof typeof ScoreScalarFieldEnum]
+
+
+export const LeagueRoleScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  leagueId: 'leagueId',
+  role: 'role'
+} as const
+
+export type LeagueRoleScalarFieldEnum = (typeof LeagueRoleScalarFieldEnum)[keyof typeof LeagueRoleScalarFieldEnum]
 
 
 export const SortOrder = {

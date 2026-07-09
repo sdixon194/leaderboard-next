@@ -10,7 +10,10 @@ export async function createLeague(ownerId: string, formData: FormData) {
       name,
       ownerId,
       players: {
-        create: [{ userId: ownerId, role: 'ADMIN' }]
+        connect: [{ id: ownerId }]
+      },
+      leagueRoles: {
+        create: [{ role: 'OWNER', playerId: ownerId }]
       }
     }
   });

@@ -15,7 +15,21 @@ export default async function LeaguePage({
   });
   const { slug } = await params;
   const league = await prisma.league.findUnique({
-    where: { id: slug }
+    where: { id: slug },
+    include: {
+      players: {
+        include: {
+          leagueRoles: {
+            where: {
+              leagueId: slug
+            },
+            select: {
+              role: true
+            },
+          }
+        }
+      }
+    }
   });
   if (!league) {
     notFound();
@@ -26,28 +40,31 @@ export default async function LeaguePage({
     },
     orderBy: {
       updatedAt: "desc"
+    },
+    include: {
+      scores: {
+        include: {
+          player: true
+        },
+        distinct: ['playerId'],
+        orderBy: {
+          score: 'desc',
+        }
+      },
     }
   });
 
-  const players = await prisma.usersOnLeagues.findMany({
-    where: { leagueId: league.id },
-    select: {
-      user: true,
-      role: true,
-    }
-  });
-  const users = players.map(p => p.user);
-  const currentPlayer = players.filter(p => p.user.id === session?.user.id);
-  const isAdmin = currentPlayer && currentPlayer[0]?.role === 'ADMIN';
+  const currentPlayer = league.players.find((player) => player.id === session?.user.id)
+  const role = currentPlayer ? currentPlayer.leagueRoles[0].role : 'VIEWER';
 
   return (
     <div className="col-span-12 flex gap-5 my-5 mx-5 flex-wrap">
-      <div className='flex-1'><UserInfo player={currentPlayer[0].user} /></div>
+      <div className='flex-1'>{currentPlayer && <UserInfo player={currentPlayer} />}</div>
       <div className='flex-2 bg-white rounded-sm p-2'>
         <h1>{league.name}</h1>
         <GameList games={games} />
       </div>
-      <div className='flex-1'><LeagueInfo league={league} players={users} isAdmin={isAdmin} /></div>
+      <div className='flex-1'><LeagueInfo league={league} players={league.players} role={role} /></div>
     </div >
   )
 }

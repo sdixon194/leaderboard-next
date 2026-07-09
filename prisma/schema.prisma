@@ -1,3 +1,8 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
 generator client {
   provider = "prisma-client"
   output   = "../src/app/generated/prisma"
@@ -8,37 +13,28 @@ datasource db {
 }
 
 model User {
-  id            String           @id
-  email         String           @unique
-  emailVerified Boolean          @default(false)
-  image         String?
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @updatedAt
+  id            String       @id
   name          String
-  accounts      Account[]
-  ownedLeagues  League[]         @relation("OwnedLeagues")
-  joinedLeagues UsersOnLeagues[]
-  scores        Score[]
+  email         String
+  emailVerified Boolean      @default(false)
+  image         String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   sessions      Session[]
+  accounts      Account[]
+  scores        Score[]
+  leagues       League[]
+  ownedLeagues  League[]     @relation("OwnedLeagues")
+  leagueRoles   LeagueRole[]
 
+  @@unique([email])
   @@map("user")
-}
-
-model UsersOnLeagues {
-  leagueId String
-  userId   String
-  role     Role   @default(PLAYER)
-  league   League @relation(fields: [leagueId], references: [id])
-  user     User   @relation(fields: [userId], references: [id])
-
-  @@id([userId, leagueId])
-  @@map("users_on_leagues")
 }
 
 model Session {
   id        String   @id
   expiresAt DateTime
-  token     String   @unique
+  token     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   ipAddress String?
@@ -46,6 +42,7 @@ model Session {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([token])
   @@index([userId])
   @@map("session")
 }
@@ -55,6 +52,7 @@ model Account {
   accountId             String
   providerId            String
   userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -64,7 +62,6 @@ model Account {
   password              String?
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("account")
@@ -83,14 +80,15 @@ model Verification {
 }
 
 model League {
-  id        String           @id @default(uuid())
-  name      String
-  ownerId   String
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
-  games     Game[]
-  owner     User             @relation("OwnedLeagues", fields: [ownerId], references: [id])
-  players   UsersOnLeagues[]
+  id          String       @id @default(uuid())
+  name        String
+  owner       User         @relation("OwnedLeagues", fields: [ownerId], references: [id])
+  ownerId     String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  games       Game[]
+  players     User[]
+  leagueRoles LeagueRole[]
 
   @@map("league")
 }
@@ -101,11 +99,11 @@ model Game {
   category  String?
   platform  String?
   createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  league    League    @relation(fields: [leagueId], references: [id])
   leagueId  String
   begin     DateTime?
   end       DateTime?
-  updatedAt DateTime  @updatedAt
-  league    League    @relation(fields: [leagueId], references: [id])
   scores    Score[]
 
   @@map("game")
@@ -113,18 +111,29 @@ model Game {
 
 model Score {
   id        String   @id @default(uuid())
+  score     Float
+  player    User     @relation(fields: [playerId], references: [id])
   playerId  String
+  game      Game     @relation(fields: [gameId], references: [id])
   gameId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  score     Float
-  game      Game     @relation(fields: [gameId], references: [id])
-  player    User     @relation(fields: [playerId], references: [id])
 
   @@map("score")
+}
+
+model LeagueRole {
+  id       String @id @default(uuid())
+  player   User   @relation(fields: [playerId], references: [id])
+  playerId String
+  league   League @relation(fields: [leagueId], references: [id])
+  leagueId String
+  role     Role
 }
 
 enum Role {
   ADMIN
   PLAYER
+  OWNER
+  VIEWER
 }

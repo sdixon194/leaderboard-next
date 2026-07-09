@@ -15,36 +15,30 @@ export default async function DashboardPage() {
   }
 
   const { user } = session;
-  const leagueObject = await prisma.usersOnLeagues.findMany({
-    where: { userId: user.id },
-    select: {
-      league: {
-        include: {
-          games: {
-            include: {
-              scores: {
-                orderBy: {
-                  score: "desc",
-                },
-                take: 1,
-              },
-            },
-            orderBy: {
-              begin: "desc",
-            },
-            take: 5,
-          },
-        },
-      },
-    }
-  });
 
   const leagues = await prisma.league.findMany({
-    where: {}
+    where: {
+      players: {
+        some: {
+          id: user.id
+        }
+      }
+    },
+    include: {
+      games: {
+        include: {
+          scores: {
+            distinct: ['playerId'],
+            orderBy: {
+              score: 'desc',
+            },
+            include: { player: true }
+          }
+        }
+      }
+    }
   })
 
-
-  console.log(leagueObject);
   return (
     <div className="m-5 flex flex-col gap-5">
       <div className="mx-5 p-5 rounded-sm drop-shadow-md bg-white">
@@ -58,7 +52,7 @@ export default async function DashboardPage() {
         </div>
         <div className="p-5 rounded-sm drop-shadow-md bg-white flex-2">
           <h2>My Leagues</h2>
-          <LeagueList leagues={leagueObject} />
+          <LeagueList leagues={leagues} />
         </div>
       </div>
     </div >

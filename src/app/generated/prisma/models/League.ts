@@ -182,9 +182,10 @@ export type LeagueWhereInput = {
   ownerId?: Prisma.StringFilter<"League"> | string
   createdAt?: Prisma.DateTimeFilter<"League"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"League"> | Date | string
-  games?: Prisma.GameListRelationFilter
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  players?: Prisma.UsersOnLeaguesListRelationFilter
+  games?: Prisma.GameListRelationFilter
+  players?: Prisma.UserListRelationFilter
+  leagueRoles?: Prisma.LeagueRoleListRelationFilter
 }
 
 export type LeagueOrderByWithRelationInput = {
@@ -193,9 +194,10 @@ export type LeagueOrderByWithRelationInput = {
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  games?: Prisma.GameOrderByRelationAggregateInput
   owner?: Prisma.UserOrderByWithRelationInput
-  players?: Prisma.UsersOnLeaguesOrderByRelationAggregateInput
+  games?: Prisma.GameOrderByRelationAggregateInput
+  players?: Prisma.UserOrderByRelationAggregateInput
+  leagueRoles?: Prisma.LeagueRoleOrderByRelationAggregateInput
 }
 
 export type LeagueWhereUniqueInput = Prisma.AtLeast<{
@@ -207,9 +209,10 @@ export type LeagueWhereUniqueInput = Prisma.AtLeast<{
   ownerId?: Prisma.StringFilter<"League"> | string
   createdAt?: Prisma.DateTimeFilter<"League"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"League"> | Date | string
-  games?: Prisma.GameListRelationFilter
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  players?: Prisma.UsersOnLeaguesListRelationFilter
+  games?: Prisma.GameListRelationFilter
+  players?: Prisma.UserListRelationFilter
+  leagueRoles?: Prisma.LeagueRoleListRelationFilter
 }, "id">
 
 export type LeagueOrderByWithAggregationInput = {
@@ -239,9 +242,10 @@ export type LeagueCreateInput = {
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  games?: Prisma.GameCreateNestedManyWithoutLeagueInput
   owner: Prisma.UserCreateNestedOneWithoutOwnedLeaguesInput
-  players?: Prisma.UsersOnLeaguesCreateNestedManyWithoutLeagueInput
+  games?: Prisma.GameCreateNestedManyWithoutLeagueInput
+  players?: Prisma.UserCreateNestedManyWithoutLeaguesInput
+  leagueRoles?: Prisma.LeagueRoleCreateNestedManyWithoutLeagueInput
 }
 
 export type LeagueUncheckedCreateInput = {
@@ -251,7 +255,8 @@ export type LeagueUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   games?: Prisma.GameUncheckedCreateNestedManyWithoutLeagueInput
-  players?: Prisma.UsersOnLeaguesUncheckedCreateNestedManyWithoutLeagueInput
+  players?: Prisma.UserUncheckedCreateNestedManyWithoutLeaguesInput
+  leagueRoles?: Prisma.LeagueRoleUncheckedCreateNestedManyWithoutLeagueInput
 }
 
 export type LeagueUpdateInput = {
@@ -259,9 +264,10 @@ export type LeagueUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  games?: Prisma.GameUpdateManyWithoutLeagueNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedLeaguesNestedInput
-  players?: Prisma.UsersOnLeaguesUpdateManyWithoutLeagueNestedInput
+  games?: Prisma.GameUpdateManyWithoutLeagueNestedInput
+  players?: Prisma.UserUpdateManyWithoutLeaguesNestedInput
+  leagueRoles?: Prisma.LeagueRoleUpdateManyWithoutLeagueNestedInput
 }
 
 export type LeagueUncheckedUpdateInput = {
@@ -271,7 +277,8 @@ export type LeagueUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   games?: Prisma.GameUncheckedUpdateManyWithoutLeagueNestedInput
-  players?: Prisma.UsersOnLeaguesUncheckedUpdateManyWithoutLeagueNestedInput
+  players?: Prisma.UserUncheckedUpdateManyWithoutLeaguesNestedInput
+  leagueRoles?: Prisma.LeagueRoleUncheckedUpdateManyWithoutLeagueNestedInput
 }
 
 export type LeagueCreateManyInput = {
@@ -307,11 +314,6 @@ export type LeagueOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type LeagueScalarRelationFilter = {
-  is?: Prisma.LeagueWhereInput
-  isNot?: Prisma.LeagueWhereInput
-}
-
 export type LeagueCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -336,10 +338,27 @@ export type LeagueMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type LeagueScalarRelationFilter = {
+  is?: Prisma.LeagueWhereInput
+  isNot?: Prisma.LeagueWhereInput
+}
+
+export type LeagueCreateNestedManyWithoutPlayersInput = {
+  create?: Prisma.XOR<Prisma.LeagueCreateWithoutPlayersInput, Prisma.LeagueUncheckedCreateWithoutPlayersInput> | Prisma.LeagueCreateWithoutPlayersInput[] | Prisma.LeagueUncheckedCreateWithoutPlayersInput[]
+  connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutPlayersInput | Prisma.LeagueCreateOrConnectWithoutPlayersInput[]
+  connect?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+}
+
 export type LeagueCreateNestedManyWithoutOwnerInput = {
   create?: Prisma.XOR<Prisma.LeagueCreateWithoutOwnerInput, Prisma.LeagueUncheckedCreateWithoutOwnerInput> | Prisma.LeagueCreateWithoutOwnerInput[] | Prisma.LeagueUncheckedCreateWithoutOwnerInput[]
   connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutOwnerInput | Prisma.LeagueCreateOrConnectWithoutOwnerInput[]
   createMany?: Prisma.LeagueCreateManyOwnerInputEnvelope
+  connect?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+}
+
+export type LeagueUncheckedCreateNestedManyWithoutPlayersInput = {
+  create?: Prisma.XOR<Prisma.LeagueCreateWithoutPlayersInput, Prisma.LeagueUncheckedCreateWithoutPlayersInput> | Prisma.LeagueCreateWithoutPlayersInput[] | Prisma.LeagueUncheckedCreateWithoutPlayersInput[]
+  connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutPlayersInput | Prisma.LeagueCreateOrConnectWithoutPlayersInput[]
   connect?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
 }
 
@@ -348,6 +367,19 @@ export type LeagueUncheckedCreateNestedManyWithoutOwnerInput = {
   connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutOwnerInput | Prisma.LeagueCreateOrConnectWithoutOwnerInput[]
   createMany?: Prisma.LeagueCreateManyOwnerInputEnvelope
   connect?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+}
+
+export type LeagueUpdateManyWithoutPlayersNestedInput = {
+  create?: Prisma.XOR<Prisma.LeagueCreateWithoutPlayersInput, Prisma.LeagueUncheckedCreateWithoutPlayersInput> | Prisma.LeagueCreateWithoutPlayersInput[] | Prisma.LeagueUncheckedCreateWithoutPlayersInput[]
+  connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutPlayersInput | Prisma.LeagueCreateOrConnectWithoutPlayersInput[]
+  upsert?: Prisma.LeagueUpsertWithWhereUniqueWithoutPlayersInput | Prisma.LeagueUpsertWithWhereUniqueWithoutPlayersInput[]
+  set?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+  disconnect?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+  delete?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+  connect?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+  update?: Prisma.LeagueUpdateWithWhereUniqueWithoutPlayersInput | Prisma.LeagueUpdateWithWhereUniqueWithoutPlayersInput[]
+  updateMany?: Prisma.LeagueUpdateManyWithWhereWithoutPlayersInput | Prisma.LeagueUpdateManyWithWhereWithoutPlayersInput[]
+  deleteMany?: Prisma.LeagueScalarWhereInput | Prisma.LeagueScalarWhereInput[]
 }
 
 export type LeagueUpdateManyWithoutOwnerNestedInput = {
@@ -361,6 +393,19 @@ export type LeagueUpdateManyWithoutOwnerNestedInput = {
   connect?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
   update?: Prisma.LeagueUpdateWithWhereUniqueWithoutOwnerInput | Prisma.LeagueUpdateWithWhereUniqueWithoutOwnerInput[]
   updateMany?: Prisma.LeagueUpdateManyWithWhereWithoutOwnerInput | Prisma.LeagueUpdateManyWithWhereWithoutOwnerInput[]
+  deleteMany?: Prisma.LeagueScalarWhereInput | Prisma.LeagueScalarWhereInput[]
+}
+
+export type LeagueUncheckedUpdateManyWithoutPlayersNestedInput = {
+  create?: Prisma.XOR<Prisma.LeagueCreateWithoutPlayersInput, Prisma.LeagueUncheckedCreateWithoutPlayersInput> | Prisma.LeagueCreateWithoutPlayersInput[] | Prisma.LeagueUncheckedCreateWithoutPlayersInput[]
+  connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutPlayersInput | Prisma.LeagueCreateOrConnectWithoutPlayersInput[]
+  upsert?: Prisma.LeagueUpsertWithWhereUniqueWithoutPlayersInput | Prisma.LeagueUpsertWithWhereUniqueWithoutPlayersInput[]
+  set?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+  disconnect?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+  delete?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+  connect?: Prisma.LeagueWhereUniqueInput | Prisma.LeagueWhereUniqueInput[]
+  update?: Prisma.LeagueUpdateWithWhereUniqueWithoutPlayersInput | Prisma.LeagueUpdateWithWhereUniqueWithoutPlayersInput[]
+  updateMany?: Prisma.LeagueUpdateManyWithWhereWithoutPlayersInput | Prisma.LeagueUpdateManyWithWhereWithoutPlayersInput[]
   deleteMany?: Prisma.LeagueScalarWhereInput | Prisma.LeagueScalarWhereInput[]
 }
 
@@ -378,20 +423,6 @@ export type LeagueUncheckedUpdateManyWithoutOwnerNestedInput = {
   deleteMany?: Prisma.LeagueScalarWhereInput | Prisma.LeagueScalarWhereInput[]
 }
 
-export type LeagueCreateNestedOneWithoutPlayersInput = {
-  create?: Prisma.XOR<Prisma.LeagueCreateWithoutPlayersInput, Prisma.LeagueUncheckedCreateWithoutPlayersInput>
-  connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutPlayersInput
-  connect?: Prisma.LeagueWhereUniqueInput
-}
-
-export type LeagueUpdateOneRequiredWithoutPlayersNestedInput = {
-  create?: Prisma.XOR<Prisma.LeagueCreateWithoutPlayersInput, Prisma.LeagueUncheckedCreateWithoutPlayersInput>
-  connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutPlayersInput
-  upsert?: Prisma.LeagueUpsertWithoutPlayersInput
-  connect?: Prisma.LeagueWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.LeagueUpdateToOneWithWhereWithoutPlayersInput, Prisma.LeagueUpdateWithoutPlayersInput>, Prisma.LeagueUncheckedUpdateWithoutPlayersInput>
-}
-
 export type LeagueCreateNestedOneWithoutGamesInput = {
   create?: Prisma.XOR<Prisma.LeagueCreateWithoutGamesInput, Prisma.LeagueUncheckedCreateWithoutGamesInput>
   connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutGamesInput
@@ -406,13 +437,53 @@ export type LeagueUpdateOneRequiredWithoutGamesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeagueUpdateToOneWithWhereWithoutGamesInput, Prisma.LeagueUpdateWithoutGamesInput>, Prisma.LeagueUncheckedUpdateWithoutGamesInput>
 }
 
+export type LeagueCreateNestedOneWithoutLeagueRolesInput = {
+  create?: Prisma.XOR<Prisma.LeagueCreateWithoutLeagueRolesInput, Prisma.LeagueUncheckedCreateWithoutLeagueRolesInput>
+  connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutLeagueRolesInput
+  connect?: Prisma.LeagueWhereUniqueInput
+}
+
+export type LeagueUpdateOneRequiredWithoutLeagueRolesNestedInput = {
+  create?: Prisma.XOR<Prisma.LeagueCreateWithoutLeagueRolesInput, Prisma.LeagueUncheckedCreateWithoutLeagueRolesInput>
+  connectOrCreate?: Prisma.LeagueCreateOrConnectWithoutLeagueRolesInput
+  upsert?: Prisma.LeagueUpsertWithoutLeagueRolesInput
+  connect?: Prisma.LeagueWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeagueUpdateToOneWithWhereWithoutLeagueRolesInput, Prisma.LeagueUpdateWithoutLeagueRolesInput>, Prisma.LeagueUncheckedUpdateWithoutLeagueRolesInput>
+}
+
+export type LeagueCreateWithoutPlayersInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedLeaguesInput
+  games?: Prisma.GameCreateNestedManyWithoutLeagueInput
+  leagueRoles?: Prisma.LeagueRoleCreateNestedManyWithoutLeagueInput
+}
+
+export type LeagueUncheckedCreateWithoutPlayersInput = {
+  id?: string
+  name: string
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  games?: Prisma.GameUncheckedCreateNestedManyWithoutLeagueInput
+  leagueRoles?: Prisma.LeagueRoleUncheckedCreateNestedManyWithoutLeagueInput
+}
+
+export type LeagueCreateOrConnectWithoutPlayersInput = {
+  where: Prisma.LeagueWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeagueCreateWithoutPlayersInput, Prisma.LeagueUncheckedCreateWithoutPlayersInput>
+}
+
 export type LeagueCreateWithoutOwnerInput = {
   id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
   games?: Prisma.GameCreateNestedManyWithoutLeagueInput
-  players?: Prisma.UsersOnLeaguesCreateNestedManyWithoutLeagueInput
+  players?: Prisma.UserCreateNestedManyWithoutLeaguesInput
+  leagueRoles?: Prisma.LeagueRoleCreateNestedManyWithoutLeagueInput
 }
 
 export type LeagueUncheckedCreateWithoutOwnerInput = {
@@ -421,7 +492,8 @@ export type LeagueUncheckedCreateWithoutOwnerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   games?: Prisma.GameUncheckedCreateNestedManyWithoutLeagueInput
-  players?: Prisma.UsersOnLeaguesUncheckedCreateNestedManyWithoutLeagueInput
+  players?: Prisma.UserUncheckedCreateNestedManyWithoutLeaguesInput
+  leagueRoles?: Prisma.LeagueRoleUncheckedCreateNestedManyWithoutLeagueInput
 }
 
 export type LeagueCreateOrConnectWithoutOwnerInput = {
@@ -432,6 +504,33 @@ export type LeagueCreateOrConnectWithoutOwnerInput = {
 export type LeagueCreateManyOwnerInputEnvelope = {
   data: Prisma.LeagueCreateManyOwnerInput | Prisma.LeagueCreateManyOwnerInput[]
   skipDuplicates?: boolean
+}
+
+export type LeagueUpsertWithWhereUniqueWithoutPlayersInput = {
+  where: Prisma.LeagueWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeagueUpdateWithoutPlayersInput, Prisma.LeagueUncheckedUpdateWithoutPlayersInput>
+  create: Prisma.XOR<Prisma.LeagueCreateWithoutPlayersInput, Prisma.LeagueUncheckedCreateWithoutPlayersInput>
+}
+
+export type LeagueUpdateWithWhereUniqueWithoutPlayersInput = {
+  where: Prisma.LeagueWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeagueUpdateWithoutPlayersInput, Prisma.LeagueUncheckedUpdateWithoutPlayersInput>
+}
+
+export type LeagueUpdateManyWithWhereWithoutPlayersInput = {
+  where: Prisma.LeagueScalarWhereInput
+  data: Prisma.XOR<Prisma.LeagueUpdateManyMutationInput, Prisma.LeagueUncheckedUpdateManyWithoutPlayersInput>
+}
+
+export type LeagueScalarWhereInput = {
+  AND?: Prisma.LeagueScalarWhereInput | Prisma.LeagueScalarWhereInput[]
+  OR?: Prisma.LeagueScalarWhereInput[]
+  NOT?: Prisma.LeagueScalarWhereInput | Prisma.LeagueScalarWhereInput[]
+  id?: Prisma.StringFilter<"League"> | string
+  name?: Prisma.StringFilter<"League"> | string
+  ownerId?: Prisma.StringFilter<"League"> | string
+  createdAt?: Prisma.DateTimeFilter<"League"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"League"> | Date | string
 }
 
 export type LeagueUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -450,76 +549,14 @@ export type LeagueUpdateManyWithWhereWithoutOwnerInput = {
   data: Prisma.XOR<Prisma.LeagueUpdateManyMutationInput, Prisma.LeagueUncheckedUpdateManyWithoutOwnerInput>
 }
 
-export type LeagueScalarWhereInput = {
-  AND?: Prisma.LeagueScalarWhereInput | Prisma.LeagueScalarWhereInput[]
-  OR?: Prisma.LeagueScalarWhereInput[]
-  NOT?: Prisma.LeagueScalarWhereInput | Prisma.LeagueScalarWhereInput[]
-  id?: Prisma.StringFilter<"League"> | string
-  name?: Prisma.StringFilter<"League"> | string
-  ownerId?: Prisma.StringFilter<"League"> | string
-  createdAt?: Prisma.DateTimeFilter<"League"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"League"> | Date | string
-}
-
-export type LeagueCreateWithoutPlayersInput = {
-  id?: string
-  name: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  games?: Prisma.GameCreateNestedManyWithoutLeagueInput
-  owner: Prisma.UserCreateNestedOneWithoutOwnedLeaguesInput
-}
-
-export type LeagueUncheckedCreateWithoutPlayersInput = {
-  id?: string
-  name: string
-  ownerId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  games?: Prisma.GameUncheckedCreateNestedManyWithoutLeagueInput
-}
-
-export type LeagueCreateOrConnectWithoutPlayersInput = {
-  where: Prisma.LeagueWhereUniqueInput
-  create: Prisma.XOR<Prisma.LeagueCreateWithoutPlayersInput, Prisma.LeagueUncheckedCreateWithoutPlayersInput>
-}
-
-export type LeagueUpsertWithoutPlayersInput = {
-  update: Prisma.XOR<Prisma.LeagueUpdateWithoutPlayersInput, Prisma.LeagueUncheckedUpdateWithoutPlayersInput>
-  create: Prisma.XOR<Prisma.LeagueCreateWithoutPlayersInput, Prisma.LeagueUncheckedCreateWithoutPlayersInput>
-  where?: Prisma.LeagueWhereInput
-}
-
-export type LeagueUpdateToOneWithWhereWithoutPlayersInput = {
-  where?: Prisma.LeagueWhereInput
-  data: Prisma.XOR<Prisma.LeagueUpdateWithoutPlayersInput, Prisma.LeagueUncheckedUpdateWithoutPlayersInput>
-}
-
-export type LeagueUpdateWithoutPlayersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  games?: Prisma.GameUpdateManyWithoutLeagueNestedInput
-  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedLeaguesNestedInput
-}
-
-export type LeagueUncheckedUpdateWithoutPlayersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  games?: Prisma.GameUncheckedUpdateManyWithoutLeagueNestedInput
-}
-
 export type LeagueCreateWithoutGamesInput = {
   id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedLeaguesInput
-  players?: Prisma.UsersOnLeaguesCreateNestedManyWithoutLeagueInput
+  players?: Prisma.UserCreateNestedManyWithoutLeaguesInput
+  leagueRoles?: Prisma.LeagueRoleCreateNestedManyWithoutLeagueInput
 }
 
 export type LeagueUncheckedCreateWithoutGamesInput = {
@@ -528,7 +565,8 @@ export type LeagueUncheckedCreateWithoutGamesInput = {
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  players?: Prisma.UsersOnLeaguesUncheckedCreateNestedManyWithoutLeagueInput
+  players?: Prisma.UserUncheckedCreateNestedManyWithoutLeaguesInput
+  leagueRoles?: Prisma.LeagueRoleUncheckedCreateNestedManyWithoutLeagueInput
 }
 
 export type LeagueCreateOrConnectWithoutGamesInput = {
@@ -553,7 +591,8 @@ export type LeagueUpdateWithoutGamesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedLeaguesNestedInput
-  players?: Prisma.UsersOnLeaguesUpdateManyWithoutLeagueNestedInput
+  players?: Prisma.UserUpdateManyWithoutLeaguesNestedInput
+  leagueRoles?: Prisma.LeagueRoleUpdateManyWithoutLeagueNestedInput
 }
 
 export type LeagueUncheckedUpdateWithoutGamesInput = {
@@ -562,7 +601,64 @@ export type LeagueUncheckedUpdateWithoutGamesInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  players?: Prisma.UsersOnLeaguesUncheckedUpdateManyWithoutLeagueNestedInput
+  players?: Prisma.UserUncheckedUpdateManyWithoutLeaguesNestedInput
+  leagueRoles?: Prisma.LeagueRoleUncheckedUpdateManyWithoutLeagueNestedInput
+}
+
+export type LeagueCreateWithoutLeagueRolesInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedLeaguesInput
+  games?: Prisma.GameCreateNestedManyWithoutLeagueInput
+  players?: Prisma.UserCreateNestedManyWithoutLeaguesInput
+}
+
+export type LeagueUncheckedCreateWithoutLeagueRolesInput = {
+  id?: string
+  name: string
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  games?: Prisma.GameUncheckedCreateNestedManyWithoutLeagueInput
+  players?: Prisma.UserUncheckedCreateNestedManyWithoutLeaguesInput
+}
+
+export type LeagueCreateOrConnectWithoutLeagueRolesInput = {
+  where: Prisma.LeagueWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeagueCreateWithoutLeagueRolesInput, Prisma.LeagueUncheckedCreateWithoutLeagueRolesInput>
+}
+
+export type LeagueUpsertWithoutLeagueRolesInput = {
+  update: Prisma.XOR<Prisma.LeagueUpdateWithoutLeagueRolesInput, Prisma.LeagueUncheckedUpdateWithoutLeagueRolesInput>
+  create: Prisma.XOR<Prisma.LeagueCreateWithoutLeagueRolesInput, Prisma.LeagueUncheckedCreateWithoutLeagueRolesInput>
+  where?: Prisma.LeagueWhereInput
+}
+
+export type LeagueUpdateToOneWithWhereWithoutLeagueRolesInput = {
+  where?: Prisma.LeagueWhereInput
+  data: Prisma.XOR<Prisma.LeagueUpdateWithoutLeagueRolesInput, Prisma.LeagueUncheckedUpdateWithoutLeagueRolesInput>
+}
+
+export type LeagueUpdateWithoutLeagueRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedLeaguesNestedInput
+  games?: Prisma.GameUpdateManyWithoutLeagueNestedInput
+  players?: Prisma.UserUpdateManyWithoutLeaguesNestedInput
+}
+
+export type LeagueUncheckedUpdateWithoutLeagueRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  games?: Prisma.GameUncheckedUpdateManyWithoutLeagueNestedInput
+  players?: Prisma.UserUncheckedUpdateManyWithoutLeaguesNestedInput
 }
 
 export type LeagueCreateManyOwnerInput = {
@@ -572,13 +668,42 @@ export type LeagueCreateManyOwnerInput = {
   updatedAt?: Date | string
 }
 
+export type LeagueUpdateWithoutPlayersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedLeaguesNestedInput
+  games?: Prisma.GameUpdateManyWithoutLeagueNestedInput
+  leagueRoles?: Prisma.LeagueRoleUpdateManyWithoutLeagueNestedInput
+}
+
+export type LeagueUncheckedUpdateWithoutPlayersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  games?: Prisma.GameUncheckedUpdateManyWithoutLeagueNestedInput
+  leagueRoles?: Prisma.LeagueRoleUncheckedUpdateManyWithoutLeagueNestedInput
+}
+
+export type LeagueUncheckedUpdateManyWithoutPlayersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type LeagueUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   games?: Prisma.GameUpdateManyWithoutLeagueNestedInput
-  players?: Prisma.UsersOnLeaguesUpdateManyWithoutLeagueNestedInput
+  players?: Prisma.UserUpdateManyWithoutLeaguesNestedInput
+  leagueRoles?: Prisma.LeagueRoleUpdateManyWithoutLeagueNestedInput
 }
 
 export type LeagueUncheckedUpdateWithoutOwnerInput = {
@@ -587,7 +712,8 @@ export type LeagueUncheckedUpdateWithoutOwnerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   games?: Prisma.GameUncheckedUpdateManyWithoutLeagueNestedInput
-  players?: Prisma.UsersOnLeaguesUncheckedUpdateManyWithoutLeagueNestedInput
+  players?: Prisma.UserUncheckedUpdateManyWithoutLeaguesNestedInput
+  leagueRoles?: Prisma.LeagueRoleUncheckedUpdateManyWithoutLeagueNestedInput
 }
 
 export type LeagueUncheckedUpdateManyWithoutOwnerInput = {
@@ -605,11 +731,13 @@ export type LeagueUncheckedUpdateManyWithoutOwnerInput = {
 export type LeagueCountOutputType = {
   games: number
   players: number
+  leagueRoles: number
 }
 
 export type LeagueCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   games?: boolean | LeagueCountOutputTypeCountGamesArgs
   players?: boolean | LeagueCountOutputTypeCountPlayersArgs
+  leagueRoles?: boolean | LeagueCountOutputTypeCountLeagueRolesArgs
 }
 
 /**
@@ -633,7 +761,14 @@ export type LeagueCountOutputTypeCountGamesArgs<ExtArgs extends runtime.Types.Ex
  * LeagueCountOutputType without action
  */
 export type LeagueCountOutputTypeCountPlayersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UsersOnLeaguesWhereInput
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * LeagueCountOutputType without action
+ */
+export type LeagueCountOutputTypeCountLeagueRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeagueRoleWhereInput
 }
 
 
@@ -643,9 +778,10 @@ export type LeagueSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  games?: boolean | Prisma.League$gamesArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  games?: boolean | Prisma.League$gamesArgs<ExtArgs>
   players?: boolean | Prisma.League$playersArgs<ExtArgs>
+  leagueRoles?: boolean | Prisma.League$leagueRolesArgs<ExtArgs>
   _count?: boolean | Prisma.LeagueCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["league"]>
 
@@ -677,9 +813,10 @@ export type LeagueSelectScalar = {
 
 export type LeagueOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["league"]>
 export type LeagueInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  games?: boolean | Prisma.League$gamesArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  games?: boolean | Prisma.League$gamesArgs<ExtArgs>
   players?: boolean | Prisma.League$playersArgs<ExtArgs>
+  leagueRoles?: boolean | Prisma.League$leagueRolesArgs<ExtArgs>
   _count?: boolean | Prisma.LeagueCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeagueIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -692,9 +829,10 @@ export type LeagueIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $LeaguePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "League"
   objects: {
-    games: Prisma.$GamePayload<ExtArgs>[]
     owner: Prisma.$UserPayload<ExtArgs>
-    players: Prisma.$UsersOnLeaguesPayload<ExtArgs>[]
+    games: Prisma.$GamePayload<ExtArgs>[]
+    players: Prisma.$UserPayload<ExtArgs>[]
+    leagueRoles: Prisma.$LeagueRolePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1096,9 +1234,10 @@ readonly fields: LeagueFieldRefs;
  */
 export interface Prisma__LeagueClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  games<T extends Prisma.League$gamesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.League$gamesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  players<T extends Prisma.League$playersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.League$playersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsersOnLeaguesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  games<T extends Prisma.League$gamesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.League$gamesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  players<T extends Prisma.League$playersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.League$playersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leagueRoles<T extends Prisma.League$leagueRolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.League$leagueRolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeagueRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1562,23 +1701,47 @@ export type League$gamesArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
  */
 export type League$playersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the UsersOnLeagues
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.UsersOnLeaguesSelect<ExtArgs> | null
+  select?: Prisma.UserSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the UsersOnLeagues
+   * Omit specific fields from the User
    */
-  omit?: Prisma.UsersOnLeaguesOmit<ExtArgs> | null
+  omit?: Prisma.UserOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UsersOnLeaguesInclude<ExtArgs> | null
-  where?: Prisma.UsersOnLeaguesWhereInput
-  orderBy?: Prisma.UsersOnLeaguesOrderByWithRelationInput | Prisma.UsersOnLeaguesOrderByWithRelationInput[]
-  cursor?: Prisma.UsersOnLeaguesWhereUniqueInput
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UsersOnLeaguesScalarFieldEnum | Prisma.UsersOnLeaguesScalarFieldEnum[]
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * League.leagueRoles
+ */
+export type League$leagueRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeagueRole
+   */
+  select?: Prisma.LeagueRoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeagueRole
+   */
+  omit?: Prisma.LeagueRoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeagueRoleInclude<ExtArgs> | null
+  where?: Prisma.LeagueRoleWhereInput
+  orderBy?: Prisma.LeagueRoleOrderByWithRelationInput | Prisma.LeagueRoleOrderByWithRelationInput[]
+  cursor?: Prisma.LeagueRoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeagueRoleScalarFieldEnum | Prisma.LeagueRoleScalarFieldEnum[]
 }
 
 /**

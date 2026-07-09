@@ -47,11 +47,6 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
- * Model UsersOnLeagues
- * 
- */
-export type UsersOnLeagues = Prisma.UsersOnLeaguesModel
-/**
  * Model Session
  * 
  */
@@ -81,3 +76,8 @@ export type Game = Prisma.GameModel
  * 
  */
 export type Score = Prisma.ScoreModel
+/**
+ * Model LeagueRole
+ * 
+ */
+export type LeagueRole = Prisma.LeagueRoleModel

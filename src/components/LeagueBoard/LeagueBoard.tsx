@@ -1,25 +1,14 @@
-import { Game } from "@/app/generated/prisma/client";
+import { Game, League } from "@/app/generated/prisma/client";
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 
-type LeagueDashType = {
-  league: {
-    id: string,
-    name: string,
-    ownerId: string,
-    createdAt: Date,
-    updatedAt: Date,
-    games: Array<Game>,
-  }
-}
 
-const LeagueBoard = ({ league }: { league: LeagueDashType }) => {
-  const games = league.league.games;
-  const url = `/leagues/${league.league.id}`;
+const LeagueBoard = ({ league }: { league: League }) => {
+  const url = `/leagues/${league.id}`;
   return (
     <div className="m-auto">
-      <p className="font-bold text-2xl"><Link href={url}>{league.league.name}</Link></p>
-      {games.map((game) => <GameTopLine game={game} key={game.id} />)}
+      <p className="font-bold text-2xl"><Link href={url}>{league.name}</Link></p>
+      {league.games.map((game) => <GameTopLine game={game} key={game.id} />)}
     </div >
   )
 }

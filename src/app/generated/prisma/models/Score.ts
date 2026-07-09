@@ -36,29 +36,29 @@ export type ScoreSumAggregateOutputType = {
 
 export type ScoreMinAggregateOutputType = {
   id: string | null
+  score: number | null
   playerId: string | null
   gameId: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  score: number | null
 }
 
 export type ScoreMaxAggregateOutputType = {
   id: string | null
+  score: number | null
   playerId: string | null
   gameId: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  score: number | null
 }
 
 export type ScoreCountAggregateOutputType = {
   id: number
+  score: number
   playerId: number
   gameId: number
   createdAt: number
   updatedAt: number
-  score: number
   _all: number
 }
 
@@ -73,29 +73,29 @@ export type ScoreSumAggregateInputType = {
 
 export type ScoreMinAggregateInputType = {
   id?: true
+  score?: true
   playerId?: true
   gameId?: true
   createdAt?: true
   updatedAt?: true
-  score?: true
 }
 
 export type ScoreMaxAggregateInputType = {
   id?: true
+  score?: true
   playerId?: true
   gameId?: true
   createdAt?: true
   updatedAt?: true
-  score?: true
 }
 
 export type ScoreCountAggregateInputType = {
   id?: true
+  score?: true
   playerId?: true
   gameId?: true
   createdAt?: true
   updatedAt?: true
-  score?: true
   _all?: true
 }
 
@@ -187,11 +187,11 @@ export type ScoreGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type ScoreGroupByOutputType = {
   id: string
+  score: number
   playerId: string
   gameId: string
   createdAt: Date
   updatedAt: Date
-  score: number
   _count: ScoreCountAggregateOutputType | null
   _avg: ScoreAvgAggregateOutputType | null
   _sum: ScoreSumAggregateOutputType | null
@@ -219,24 +219,24 @@ export type ScoreWhereInput = {
   OR?: Prisma.ScoreWhereInput[]
   NOT?: Prisma.ScoreWhereInput | Prisma.ScoreWhereInput[]
   id?: Prisma.StringFilter<"Score"> | string
+  score?: Prisma.FloatFilter<"Score"> | number
   playerId?: Prisma.StringFilter<"Score"> | string
   gameId?: Prisma.StringFilter<"Score"> | string
   createdAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Score"> | Date | string
-  score?: Prisma.FloatFilter<"Score"> | number
-  game?: Prisma.XOR<Prisma.GameScalarRelationFilter, Prisma.GameWhereInput>
   player?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  game?: Prisma.XOR<Prisma.GameScalarRelationFilter, Prisma.GameWhereInput>
 }
 
 export type ScoreOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  score?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   gameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  score?: Prisma.SortOrder
-  game?: Prisma.GameOrderByWithRelationInput
   player?: Prisma.UserOrderByWithRelationInput
+  game?: Prisma.GameOrderByWithRelationInput
 }
 
 export type ScoreWhereUniqueInput = Prisma.AtLeast<{
@@ -244,22 +244,22 @@ export type ScoreWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ScoreWhereInput | Prisma.ScoreWhereInput[]
   OR?: Prisma.ScoreWhereInput[]
   NOT?: Prisma.ScoreWhereInput | Prisma.ScoreWhereInput[]
+  score?: Prisma.FloatFilter<"Score"> | number
   playerId?: Prisma.StringFilter<"Score"> | string
   gameId?: Prisma.StringFilter<"Score"> | string
   createdAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Score"> | Date | string
-  score?: Prisma.FloatFilter<"Score"> | number
-  game?: Prisma.XOR<Prisma.GameScalarRelationFilter, Prisma.GameWhereInput>
   player?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  game?: Prisma.XOR<Prisma.GameScalarRelationFilter, Prisma.GameWhereInput>
 }, "id">
 
 export type ScoreOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  score?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   gameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  score?: Prisma.SortOrder
   _count?: Prisma.ScoreCountOrderByAggregateInput
   _avg?: Prisma.ScoreAvgOrderByAggregateInput
   _max?: Prisma.ScoreMaxOrderByAggregateInput
@@ -272,72 +272,72 @@ export type ScoreScalarWhereWithAggregatesInput = {
   OR?: Prisma.ScoreScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ScoreScalarWhereWithAggregatesInput | Prisma.ScoreScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Score"> | string
+  score?: Prisma.FloatWithAggregatesFilter<"Score"> | number
   playerId?: Prisma.StringWithAggregatesFilter<"Score"> | string
   gameId?: Prisma.StringWithAggregatesFilter<"Score"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Score"> | Date | string
-  score?: Prisma.FloatWithAggregatesFilter<"Score"> | number
 }
 
 export type ScoreCreateInput = {
   id?: string
+  score: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  score: number
-  game: Prisma.GameCreateNestedOneWithoutScoresInput
   player: Prisma.UserCreateNestedOneWithoutScoresInput
+  game: Prisma.GameCreateNestedOneWithoutScoresInput
 }
 
 export type ScoreUncheckedCreateInput = {
   id?: string
+  score: number
   playerId: string
   gameId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  score: number
 }
 
 export type ScoreUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  score?: Prisma.FloatFieldUpdateOperationsInput | number
-  game?: Prisma.GameUpdateOneRequiredWithoutScoresNestedInput
   player?: Prisma.UserUpdateOneRequiredWithoutScoresNestedInput
+  game?: Prisma.GameUpdateOneRequiredWithoutScoresNestedInput
 }
 
 export type ScoreUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.FloatFieldUpdateOperationsInput | number
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  score?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScoreCreateManyInput = {
   id?: string
+  score: number
   playerId: string
   gameId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  score: number
 }
 
 export type ScoreUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  score?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScoreUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.FloatFieldUpdateOperationsInput | number
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  score?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScoreListRelationFilter = {
@@ -352,11 +352,11 @@ export type ScoreOrderByRelationAggregateInput = {
 
 export type ScoreCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  score?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   gameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  score?: Prisma.SortOrder
 }
 
 export type ScoreAvgOrderByAggregateInput = {
@@ -365,20 +365,20 @@ export type ScoreAvgOrderByAggregateInput = {
 
 export type ScoreMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  score?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   gameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  score?: Prisma.SortOrder
 }
 
 export type ScoreMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  score?: Prisma.SortOrder
   playerId?: Prisma.SortOrder
   gameId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  score?: Prisma.SortOrder
 }
 
 export type ScoreSumOrderByAggregateInput = {
@@ -479,18 +479,18 @@ export type FloatFieldUpdateOperationsInput = {
 
 export type ScoreCreateWithoutPlayerInput = {
   id?: string
+  score: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  score: number
   game: Prisma.GameCreateNestedOneWithoutScoresInput
 }
 
 export type ScoreUncheckedCreateWithoutPlayerInput = {
   id?: string
+  score: number
   gameId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  score: number
 }
 
 export type ScoreCreateOrConnectWithoutPlayerInput = {
@@ -524,27 +524,27 @@ export type ScoreScalarWhereInput = {
   OR?: Prisma.ScoreScalarWhereInput[]
   NOT?: Prisma.ScoreScalarWhereInput | Prisma.ScoreScalarWhereInput[]
   id?: Prisma.StringFilter<"Score"> | string
+  score?: Prisma.FloatFilter<"Score"> | number
   playerId?: Prisma.StringFilter<"Score"> | string
   gameId?: Prisma.StringFilter<"Score"> | string
   createdAt?: Prisma.DateTimeFilter<"Score"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Score"> | Date | string
-  score?: Prisma.FloatFilter<"Score"> | number
 }
 
 export type ScoreCreateWithoutGameInput = {
   id?: string
+  score: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  score: number
   player: Prisma.UserCreateNestedOneWithoutScoresInput
 }
 
 export type ScoreUncheckedCreateWithoutGameInput = {
   id?: string
+  score: number
   playerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  score: number
 }
 
 export type ScoreCreateOrConnectWithoutGameInput = {
@@ -575,139 +575,139 @@ export type ScoreUpdateManyWithWhereWithoutGameInput = {
 
 export type ScoreCreateManyPlayerInput = {
   id?: string
+  score: number
   gameId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  score: number
 }
 
 export type ScoreUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  score?: Prisma.FloatFieldUpdateOperationsInput | number
   game?: Prisma.GameUpdateOneRequiredWithoutScoresNestedInput
 }
 
 export type ScoreUncheckedUpdateWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.FloatFieldUpdateOperationsInput | number
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  score?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScoreUncheckedUpdateManyWithoutPlayerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.FloatFieldUpdateOperationsInput | number
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  score?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScoreCreateManyGameInput = {
   id?: string
+  score: number
   playerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  score: number
 }
 
 export type ScoreUpdateWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  score?: Prisma.FloatFieldUpdateOperationsInput | number
   player?: Prisma.UserUpdateOneRequiredWithoutScoresNestedInput
 }
 
 export type ScoreUncheckedUpdateWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.FloatFieldUpdateOperationsInput | number
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  score?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 export type ScoreUncheckedUpdateManyWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.FloatFieldUpdateOperationsInput | number
   playerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  score?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
 
 
 export type ScoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  score?: boolean
   playerId?: boolean
   gameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  score?: boolean
-  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
   player?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["score"]>
 
 export type ScoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  score?: boolean
   playerId?: boolean
   gameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  score?: boolean
-  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
   player?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["score"]>
 
 export type ScoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  score?: boolean
   playerId?: boolean
   gameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  score?: boolean
-  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
   player?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["score"]>
 
 export type ScoreSelectScalar = {
   id?: boolean
+  score?: boolean
   playerId?: boolean
   gameId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  score?: boolean
 }
 
-export type ScoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "playerId" | "gameId" | "createdAt" | "updatedAt" | "score", ExtArgs["result"]["score"]>
+export type ScoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "score" | "playerId" | "gameId" | "createdAt" | "updatedAt", ExtArgs["result"]["score"]>
 export type ScoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
   player?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
 }
 export type ScoreIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
   player?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
 }
 export type ScoreIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
   player?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
 }
 
 export type $ScorePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Score"
   objects: {
-    game: Prisma.$GamePayload<ExtArgs>
     player: Prisma.$UserPayload<ExtArgs>
+    game: Prisma.$GamePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    score: number
     playerId: string
     gameId: string
     createdAt: Date
     updatedAt: Date
-    score: number
   }, ExtArgs["result"]["score"]>
   composites: {}
 }
@@ -1102,8 +1102,8 @@ readonly fields: ScoreFieldRefs;
  */
 export interface Prisma__ScoreClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  game<T extends Prisma.GameDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameDefaultArgs<ExtArgs>>): Prisma.Prisma__GameClient<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   player<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  game<T extends Prisma.GameDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameDefaultArgs<ExtArgs>>): Prisma.Prisma__GameClient<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1134,11 +1134,11 @@ export interface Prisma__ScoreClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface ScoreFieldRefs {
   readonly id: Prisma.FieldRef<"Score", 'String'>
+  readonly score: Prisma.FieldRef<"Score", 'Float'>
   readonly playerId: Prisma.FieldRef<"Score", 'String'>
   readonly gameId: Prisma.FieldRef<"Score", 'String'>
   readonly createdAt: Prisma.FieldRef<"Score", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Score", 'DateTime'>
-  readonly score: Prisma.FieldRef<"Score", 'Float'>
 }
     
 
