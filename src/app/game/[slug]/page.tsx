@@ -6,6 +6,7 @@ import GameBoard from "@/components/GameBoard/GameBoard";
 import UserInfo from "@/components/UserInfo/UserInfo";
 import LeagueInfo from "@/components/LeagueInfo/LeagueInfo";
 import ScoreHistory from "@/components/ScoreHistory/ScoreHistory";
+import { Role } from "@/app/generated/prisma/client";
 
 export default async function GamePage({
   params,
@@ -61,7 +62,6 @@ export default async function GamePage({
     },
     orderBy: { createdAt: "desc" },
   });
-  console.log(allScores);
 
   return (
     <div className="col-span-12 flex gap-5 my-5 mx-5 flex-wrap">
@@ -70,7 +70,8 @@ export default async function GamePage({
           <UserInfo
             player={{
               ...currentPlayer,
-              leagueRoles: playerRole,
+              //leagueRoles: playerRole,
+              leagueRoles: playerRole ?? Role.VIEWER,
             }}
           />
         )}
