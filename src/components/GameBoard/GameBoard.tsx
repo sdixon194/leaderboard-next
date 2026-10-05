@@ -1,5 +1,5 @@
 import SubmitScore from "@/components/SubmitScore";
-import { Game, Score, User } from "@/app/generated/prisma/client";
+import { Game, Role, Score, User } from "@/app/generated/prisma/client";
 import PlayerScore from "../PlayerScore/PlayerScore";
 import Link from "next/link";
 
@@ -12,9 +12,13 @@ type GameType = Game & {
 export default function GameBoard({
   game,
   currentPlayer,
+  role,
+  players,
 }: {
   game: GameType;
   currentPlayer: User | null;
+  role: Role;
+  players: Array<User>
 }) {
   const endTime = game.end ?? null;
   const isFinished = endTime ? Date.now() - endTime.getTime() >= 0 : false;
@@ -66,7 +70,7 @@ export default function GameBoard({
         </table>
       </div>
       {currentPlayer && !isFinished && (
-        <SubmitScore gameId={game.id} user={currentPlayer} />
+        <SubmitScore gameId={game.id} user={currentPlayer} role={role} players={players} />
       )}
     </div>
   );
