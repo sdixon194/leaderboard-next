@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { notFound } from 'next/navigation';
+import { Role } from "@/app/generated/prisma/client";
 import GameList from "@/components/GameList/GameList";
 import UserInfo from "@/components/UserInfo/UserInfo";
 import LeagueInfo from "@/components/LeagueInfo/LeagueInfo"
@@ -59,10 +60,14 @@ export default async function LeaguePage({
 
   return (
     <div className="col-span-12 flex gap-5 my-5 mx-5 flex-wrap">
-      <div className='flex-1'>{currentPlayer && <UserInfo player={currentPlayer} />}</div>
+      <div className='flex-1'>{currentPlayer && <UserInfo
+        player={{
+          ...currentPlayer,
+          leagueRoles: role ?? Role.VIEWER,
+        }} />}</div>
       <div className='flex-2 bg-white rounded-sm p-2'>
         <h1>{league.name}</h1>
-        <GameList games={games} currentPlayer={currentPlayer} />
+        <GameList games={games} currentPlayer={currentPlayer} role={role} players={league.players} />
       </div>
       <div className='flex-1'><LeagueInfo league={league} players={league.players} role={role} /></div>
     </div >

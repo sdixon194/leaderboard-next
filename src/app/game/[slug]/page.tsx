@@ -70,7 +70,6 @@ export default async function GamePage({
           <UserInfo
             player={{
               ...currentPlayer,
-              //leagueRoles: playerRole,
               leagueRoles: playerRole ?? Role.VIEWER,
             }}
           />
@@ -78,7 +77,7 @@ export default async function GamePage({
       </div>
       <div className="flex-2 bg-white rounded-sm p-2">
         <h1>Game Info</h1>
-        <GameBoard game={game} key={game.id} currentPlayer={currentPlayer} />
+        <GameBoard game={game} key={game.id} currentPlayer={currentPlayer} role={playerRole ?? Role.VIEWER} players={game.league.players} />
         <ScoreHistory scores={allScores} currentPlayer={currentPlayer} />
       </div>
       <div className="flex-1">

@@ -4,7 +4,7 @@ import InvitePlayer from "@/components/InvitePlayer/InvitePlayer";
 import PlayerList from "@/components/PlayerList/PlayerList";
 
 const LeagueInfo = ({ league, players, role }: { league: League, players: Array<User>, role: Role }) => {
-  const isAdmin = role === 'ADMIN' || 'OWNER';
+  const isAdmin = (role === 'ADMIN' || role === 'OWNER') ? true : false;
   return (
     <div className="flex flex-col gap-5">
       <PlayerList players={players} />
